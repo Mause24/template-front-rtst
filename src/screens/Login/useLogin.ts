@@ -45,7 +45,7 @@ export const useLogin = () => {
 				setSession(response.data.data)
 			}
 		} catch (error) {
-			console.log(error)
+			console.error(error)
 		} finally {
 			setSubmitting(false)
 		}

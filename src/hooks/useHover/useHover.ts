@@ -9,13 +9,15 @@ export const useHovers = <T extends HTMLElement>({
 	const [hoverings, setHoverings] =
 		useState<(number | string)[]>(defaultValue)
 
-	const onHoverIn = (index: number, value: number | string) =>
+	const onHoverIn = (index: number, value: number | string) => {
 		setHoverings(state =>
 			state.map((item, i) => (i !== index ? item : value))
 		)
+	}
 
-	const onHoverOut = (index: number) =>
+	const onHoverOut = (index: number) => {
 		setHoverings(state => state.map((item, i) => (i !== index ? item : -1)))
+	}
 
 	const setHandlers = () =>
 		refs.forEach((ref, index) => {
@@ -34,13 +36,9 @@ export const useHovers = <T extends HTMLElement>({
 export const useHover = <T extends HTMLElement>({ ref }: UseHoverProps<T>) => {
 	const [hovering, setHovering] = useState<number | string>(-1)
 
-	const onHoverIn = (index: number | string) => {
-		setHovering(index)
-	}
+	const onHoverIn = (index: number | string) => setHovering(index)
 
-	const onHoverOut = () => {
-		setHovering(-1)
-	}
+	const onHoverOut = () => setHovering(-1)
 
 	const setHandlers = () => {
 		ref.current!.onmouseenter = ev => {

@@ -1,19 +1,13 @@
+import { useHovers } from "@/hooks"
 import { useAuthStore } from "@/stores"
-import { useMemo, useState } from "react"
+import { times } from "lodash"
+import { useMemo, useRef } from "react"
 import { HeaderProps } from "./Header.types"
 
 export const useHeader = (props: HeaderProps) => {
 	const { isAdmin } = props
 	const { isAuth, deleteSession } = useAuthStore()
-	const [hovering, setHovering] = useState<number | string>(-1)
-
-	const onHoverIn = (index: number | string) => () => {
-		setHovering(index)
-	}
-
-	const onHoverOut = () => {
-		setHovering(-1)
-	}
+	const refCloseButton = useRef<HTMLLIElement>(null)
 
 	const linksArray = useMemo(
 		() =>
@@ -35,10 +29,18 @@ export const useHeader = (props: HeaderProps) => {
 		[isAuth()]
 	)
 
+	const refLinks = times(linksArray.length, () =>
+		useRef<HTMLAnchorElement>(null)
+	)
+	const [hoverCloseButton, ...hoverLinks] = useHovers({
+		refs: [refCloseButton, ...refLinks] as React.RefObject<HTMLElement>[],
+	})
+
 	return {
-		hovering,
-		onHoverIn,
-		onHoverOut,
+		hoverLinks,
+		hoverCloseButton,
+		refCloseButton,
+		refLinks,
 		isAdmin,
 		isAuth,
 		linksArray,

@@ -8,9 +8,10 @@ import { useHeader } from "./useHeader"
 
 export const Header = (props: HeaderProps): JSX.Element => {
 	const {
-		hovering,
-		onHoverIn,
-		onHoverOut,
+		hoverCloseButton,
+		hoverLinks,
+		refLinks,
+		refCloseButton,
 		linksArray,
 		isAuth,
 		deleteSession,
@@ -50,11 +51,11 @@ export const Header = (props: HeaderProps): JSX.Element => {
 
 			<nav className={clsx("flex")}>
 				<ul className={clsx("flex", "px-2", "gap-x-4")}>
-					{linksArray.map(item => (
+					{linksArray.map((item, index) => (
 						<li key={item.id} className={clsx("flex", "relative")}>
 							<Link
-								onMouseEnter={onHoverIn(item.id)}
-								onMouseLeave={onHoverOut}
+								id={String(item.id)}
+								ref={refLinks[index]}
 								to={item.route}
 								className={clsx(
 									"flex",
@@ -70,7 +71,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									"after:duration-[400ms]",
 									"after:bottom-0",
 									"after:left-0",
-									hovering === item.id
+									Number(hoverLinks[index]) === item.id
 										? "after:scale-x-100"
 										: "after:scale-x-0"
 								)}
@@ -91,11 +92,11 @@ export const Header = (props: HeaderProps): JSX.Element => {
 					{isAuth() && (
 						<li
 							key={"close-session"}
+							ref={refCloseButton}
+							id="close-session"
 							className={clsx("flex", "relative")}
 						>
 							<Button
-								onMouseEnter={onHoverIn("close-session")}
-								onMouseLeave={onHoverOut}
 								className={clsx(
 									"flex",
 									"w-full",
@@ -110,7 +111,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									"after:duration-[400ms]",
 									"after:bottom-0",
 									"after:left-0",
-									hovering === "close-session"
+									hoverCloseButton === "close-session"
 										? "after:scale-x-100"
 										: "after:scale-x-0"
 								)}

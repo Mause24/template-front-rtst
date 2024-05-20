@@ -10,12 +10,9 @@ export const useProtectedRoute = (props: ProtectedRouteProps) => {
 		children,
 	} = props
 
-	const isCurrentLocked = useMemo(() => {
-		console.log(isLocked)
-		console.log(extraValidation())
-
-		return isLocked || !extraValidation()
-	}, [isLocked, extraValidation()])
-
+	const isCurrentLocked = useMemo(
+		() => isLocked || !extraValidation(),
+		[isLocked, extraValidation()]
+	)
 	return { extraValidation, isCurrentLocked, redirect, children }
 }
