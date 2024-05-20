@@ -1,4 +1,4 @@
-import { Button } from "@/components"
+import { Button, Input } from "@/components"
 import { useAuthStore } from "@/stores"
 import { CONFIGENV } from "@/utils"
 import clsx from "clsx"
@@ -68,7 +68,7 @@ export const Login = (): JSX.Element => {
 				>
 					Iniciar Sesion
 				</h2>
-				<label
+				{/* <label
 					className={clsx("text-base", "text-primary-normal")}
 					htmlFor="email"
 				>
@@ -81,6 +81,14 @@ export const Login = (): JSX.Element => {
 					name="email"
 					autoComplete="username"
 					id="email"
+				/> */}
+				<Input
+					label={"E-mail"}
+					id="email"
+					name="email"
+					error="Hola"
+					autoComplete="username"
+					onChange={handleForm("email")}
 				/>
 				<label
 					className={clsx("text-base", "text-primary-normal")}

@@ -4,8 +4,8 @@ import { HeaderProps } from "./Header.types"
 
 export const useHeader = (props: HeaderProps) => {
 	const { isAdmin } = props
-	const [hovering, setHovering] = useState<number | string>(-1)
 	const { isAuth, deleteSession } = useAuthStore()
+	const [hovering, setHovering] = useState<number | string>(-1)
 
 	const onHoverIn = (index: number | string) => () => {
 		setHovering(index)

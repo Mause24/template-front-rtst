@@ -1,16 +1,118 @@
 export type TextTypes = {
-	h1: React.HTMLAttributes<HTMLHeadingElement>
-	h2: React.HTMLAttributes<HTMLHeadingElement>
-	h3: React.HTMLAttributes<HTMLHeadingElement>
-	h4: React.HTMLAttributes<HTMLHeadingElement>
-	h5: React.HTMLAttributes<HTMLHeadingElement>
-	h6: React.HTMLAttributes<HTMLHeadingElement>
-	span: React.HTMLAttributes<HTMLSpanElement>
-	b: React.HTMLAttributes<HTMLElement>
-	strong: React.HTMLAttributes<HTMLElement>
-	p: React.HTMLAttributes<HTMLParagraphElement>
-	label: React.LabelHTMLAttributes<HTMLLabelElement>
-	legend: React.HTMLAttributes<HTMLLegendElement>
+	abbr: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	address: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	b: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	bdi: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	bdo: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	blockquote: React.DetailedHTMLProps<
+		React.BlockquoteHTMLAttributes<HTMLQuoteElement>,
+		HTMLQuoteElement
+	>
+	cite: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	code: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	del: React.DetailedHTMLProps<
+		React.DelHTMLAttributes<HTMLModElement>,
+		HTMLModElement
+	>
+	dfn: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	em: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	h1: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	h2: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	h3: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	h4: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	h5: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	h6: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLHeadingElement>,
+		HTMLHeadingElement
+	>
+	i: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	ins: React.DetailedHTMLProps<
+		React.InsHTMLAttributes<HTMLModElement>,
+		HTMLModElement
+	>
+	kbd: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	label: React.DetailedHTMLProps<
+		React.LabelHTMLAttributes<HTMLLabelElement>,
+		HTMLLabelElement
+	>
+	legend: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLLegendElement>,
+		HTMLLegendElement
+	>
+	mark: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	p: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLParagraphElement>,
+		HTMLParagraphElement
+	>
+	pre: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLPreElement>,
+		HTMLPreElement
+	>
+	q: React.DetailedHTMLProps<
+		React.QuoteHTMLAttributes<HTMLQuoteElement>,
+		HTMLQuoteElement
+	>
+	rp: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	rt: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	ruby: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	s: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	samp: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	small: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	span: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLSpanElement>,
+		HTMLSpanElement
+	>
+	strong: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLElement>,
+		HTMLElement
+	>
+	sub: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	sup: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	time: React.DetailedHTMLProps<
+		React.TimeHTMLAttributes<HTMLTimeElement>,
+		HTMLTimeElement
+	>
+	u: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
+	var: React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>
 }
 
 export enum TextSizes {
