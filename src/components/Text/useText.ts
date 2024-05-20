@@ -4,7 +4,7 @@ import { TextColors, TextProps, TextSizes, TextTypes } from "./Text.types"
 export const useText = <T extends keyof TextTypes>(props: TextProps<T>) => {
 	const { type, children, props: textAttributes, size, color } = props
 
-	const defaultTextProps: TextTypes = {
+	const defaultTextProps: Partial<TextTypes> = {
 		b: { className: clsx("text-primary-normal", "font-mono", "text-base") },
 		h1: { className: clsx("text-primary-normal", "font-mono", "text-4xl") },
 		h2: { className: clsx("text-primary-normal", "font-mono", "text-3xl") },
@@ -31,7 +31,7 @@ export const useText = <T extends keyof TextTypes>(props: TextProps<T>) => {
 		...defaultTextProps[type],
 		...textAttributes,
 		className: clsx(
-			defaultTextProps[type].className,
+			defaultTextProps[type]?.className ?? "",
 			textAttributes?.className,
 			size && TextSizes[size],
 			color && TextColors[color]

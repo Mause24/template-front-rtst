@@ -1,116 +1,110 @@
-import { Button, Input } from "@/components"
-import { useAuthStore } from "@/stores"
-import { CONFIGENV } from "@/utils"
+import { Button, Input, Text } from "@/components"
 import clsx from "clsx"
-import { useState } from "react"
+import { Formik } from "formik"
+import { useLogin } from "./useLogin"
 
 export const Login = (): JSX.Element => {
-	const [form, setForm] = useState({
-		email: "",
-		password: "",
-	})
-	const { setSession } = useAuthStore()
-
-	const handleForm =
-		(name: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-			setForm(state => ({ ...state, [name]: event.target.value }))
-		}
-
-	const onSubmit = async (): Promise<void> => {
-		try {
-			const response = await fetch(CONFIGENV.APP_URL + "/auth/login/", {
-				body: JSON.stringify(form),
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
-
-			if (response.status === 200) {
-				const parsedObject = await response.json()
-				setSession(parsedObject.data)
-			}
-		} catch (error) {
-			console.log(error)
-		}
-	}
+	const { onSubmit, validationSchema } = useLogin()
 
 	return (
 		<div
 			className={clsx(
 				"w-full",
-				"h-[calc(100dvh-290px)]",
+				"min-h-[calc(100dvh-290px)]",
+				"py-2",
 				"flex",
 				"justify-center",
 				"items-center"
 			)}
 		>
-			<form
-				onSubmit={evt => evt.preventDefault()}
-				className={clsx(
-					"flex",
-					"flex-col",
-					"gap-y-4",
-					"w-[50%]",
-					"border-2",
-					"shadow-md",
-					"px-3",
-					"py-10",
-					"rounded-md"
-				)}
+			<Formik
+				initialValues={{
+					email: "",
+					password: "",
+				}}
+				validationSchema={validationSchema}
+				onSubmit={(values, { setSubmitting }) => {
+					onSubmit(values, setSubmitting)
+				}}
 			>
-				<h2
-					className={clsx(
-						"text-2xl",
-						"text-primary-normal",
-						"text-center"
-					)}
-				>
-					Iniciar Sesion
-				</h2>
-				{/* <label
-					className={clsx("text-base", "text-primary-normal")}
-					htmlFor="email"
-				>
-					E-mail
-				</label>
-				<input
-					className={clsx("border-2", "rounded-md", "outline-none")}
-					onChange={handleForm("email")}
-					type="email"
-					name="email"
-					autoComplete="username"
-					id="email"
-				/> */}
-				<Input
-					label={"E-mail"}
-					id="email"
-					name="email"
-					error="Hola"
-					autoComplete="username"
-					onChange={handleForm("email")}
-				/>
-				<label
-					className={clsx("text-base", "text-primary-normal")}
-					htmlFor="password"
-				>
-					Contraseña
-				</label>
-				<input
-					className={clsx("border-2", "rounded-md", "outline-none")}
-					onChange={handleForm("password")}
-					type="password"
-					autoComplete="current-password"
-					name="password"
-					id="password"
-				/>
-				<Button
-					className={clsx("border-2", "border-black", "rounded")}
-					onClick={onSubmit}
-				>
-					Iniciar Sesion
-				</Button>
-			</form>
+				{({
+					values,
+					errors,
+					touched,
+					handleChange,
+					handleBlur,
+					handleSubmit,
+					isSubmitting,
+				}) => (
+					<form
+						onSubmit={handleSubmit}
+						className={clsx(
+							"flex",
+							"flex-col",
+							"gap-y-4",
+							"w-[50%]",
+							"border-2",
+							"shadow-md",
+							"px-3",
+							"py-10",
+							"rounded-md"
+						)}
+					>
+						<Text
+							type="h2"
+							props={{
+								className: clsx(
+									"text-2xl",
+									"text-primary-normal",
+									"text-center"
+								),
+							}}
+						>
+							Iniciar Sesion
+						</Text>
+
+						<Input
+							type="email"
+							label="E-mail"
+							id="email"
+							name="email"
+							autoComplete="username"
+							customType="googleInput"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.email}
+							error={touched.email ? errors.email : undefined}
+						/>
+
+						<Input
+							type="password"
+							label="Contraseña"
+							id="password"
+							name="password"
+							customType="googleInput"
+							autoComplete="current-password"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.password}
+							error={
+								touched.password ? errors.password : undefined
+							}
+						/>
+
+						<Button
+							className={clsx(
+								"border-2",
+								"border-black",
+								"rounded"
+							)}
+							type="submit"
+							disabled={isSubmitting}
+						>
+							Iniciar Sesion
+						</Button>
+					</form>
+				)}
+			</Formik>
 		</div>
 	)
 }

@@ -1,5 +1,6 @@
-import { useHovers } from "@/hooks"
+import { useHover } from "@/hooks"
 import clsx from "clsx"
+import { isEmpty } from "lodash"
 import { useMemo, useRef } from "react"
 import { InputProps } from "./Input.types"
 
@@ -11,15 +12,15 @@ export const useInput = (props: InputProps) => {
 		id,
 		className,
 		variant = "primary",
-		type = "normal",
+		customType = "normal",
+		value,
 		label,
+		placeholder,
 		...rest
 	} = props
 	const refInput = useRef<HTMLInputElement>(null)
-	const refInput2 = useRef<HTMLInputElement>(null)
 
-	/* const { hovering } = useHover({ ref: refInput }) */
-	const [hover1, hover2] = useHovers({ refs: [refInput, refInput2] })
+	const hovering = useHover({ ref: refInput })
 
 	const stylesTypes = {
 		normal: {
@@ -28,25 +29,55 @@ export const useInput = (props: InputProps) => {
 			input: clsx(""),
 		},
 		googleInput: {
-			container: clsx(""),
-			label: clsx(""),
-			input: clsx(""),
+			container: clsx(
+				"relative",
+				"[&>label:has(+input:focus-within)]:bg-white",
+				"[&>label:has(+input:focus-within)]:scale-[70%]",
+				"[&>label:has(+input:focus-within)]:translate-y-[-25px]",
+				"[&>label:has(+input:focus-within)]:translate-x-[-13px]"
+			),
+			label: clsx(
+				"absolute",
+				"text-sm",
+				"left-3",
+				"top-[12px]",
+				"transition-all",
+				"duration-[50ms]",
+				"ease-linear",
+				"pointer-events-none",
+				!isEmpty(value) &&
+					clsx(
+						"bg-white",
+						"scale-[70%]",
+						"translate-y-[-25px]",
+						"translate-x-[-13px]"
+					)
+			),
+			input: clsx(),
 		},
 	}
+
+	const currentPlaceholder = useMemo(
+		() => (customType === "googleInput" ? undefined : placeholder),
+		[placeholder, customType]
+	)
 
 	const stylesVariants = {
 		primary: clsx(
 			"focus-within:border-primary-normal",
-			hover1 !== -1 ? "border-primary-normal" : "border-gray-500"
+			hovering !== -1 ? "border-primary-normal" : "border-[#e5e7eb]"
 		),
 		secondary: clsx(""),
 	}
 
-	const styleType = useMemo(() => stylesTypes[type], [type])
+	const styleType = useMemo(
+		() => stylesTypes[customType],
+		[customType, value]
+	)
 
 	const styleVariant = useMemo(
 		() => stylesVariants[variant],
-		[variant, hover1]
+		[variant, hovering]
 	)
 
 	return {
@@ -56,10 +87,10 @@ export const useInput = (props: InputProps) => {
 		styleType,
 		styleVariant,
 		label,
+		currentPlaceholder,
 		id,
 		error,
 		refInput,
-		refInput2,
 		rest,
 	}
 }

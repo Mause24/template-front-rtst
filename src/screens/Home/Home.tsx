@@ -3,17 +3,23 @@ import clsx from "clsx"
 
 export const Home = (): JSX.Element => {
 	const { session } = useAuthStore()
+
 	return (
 		<div
 			className={clsx(
 				"w-full",
-				"h-[calc(100dvh-290px)]",
+				"min-h-[calc(100dvh-290px)]",
+				"py-4",
 				"flex",
 				"justify-center",
 				"items-center"
 			)}
 		>
-			<img src={session.user.avatarImage} alt="avatar" />
+			<img
+				className={clsx("h-96", "bg-cover")}
+				src={session.user.avatarImage}
+				alt="avatar"
+			/>
 		</div>
 	)
 }

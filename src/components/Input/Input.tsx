@@ -12,21 +12,34 @@ export const Input = (props: InputProps) => {
 		styleType,
 		styleVariant,
 		refInput,
-		refInput2,
 		id,
+		currentPlaceholder,
 		error,
 		rest,
 	} = useInput(props)
 
 	return (
-		<div className={clsx("flex", "flex-col",styleType.container, containerClassname)}>
+		<div
+			className={clsx(
+				"flex",
+				"flex-col",
+				styleType.container,
+				containerClassname
+			)}
+		>
 			{label && (
 				<Text
 					type="label"
+					size="lg"
 					props={{
-						className: clsx(styleType.label,labelClassname),
+						className: clsx(
+							"font-bold",
+							styleType.label,
+							labelClassname
+						),
 						htmlFor: id ?? label,
 					}}
+					color={error ? "red" : "primary"}
 				>
 					{label}
 				</Text>
@@ -36,16 +49,20 @@ export const Input = (props: InputProps) => {
 				id={id ?? label}
 				className={clsx(
 					"border-2",
+					"pl-3",
+					"py-3",
 					"rounded-md",
 					"outline-none",
 					"focus-within:outline-none",
 					"transition-all",
 					"duration-200",
 					"ease-linear",
+					error ? "border-red-400" : "",
 					styleType.input,
 					styleVariant,
-					className,
+					className
 				)}
+				placeholder={currentPlaceholder}
 				{...rest}
 			/>
 			{error &&
@@ -53,7 +70,10 @@ export const Input = (props: InputProps) => {
 					<Text
 						color="red"
 						type="span"
-						props={{ ref: refInput2, id: "error" }}
+						size="sm"
+						props={{
+							className: clsx("ml-2", "mt-2"),
+						}}
 					>
 						{error}
 					</Text>

@@ -8,7 +8,7 @@ export interface InputProps
 	> {
 	error?: string | JSX.Element
 	variant?: InputVariants
-	type?: InputTypes
+	customType?: InputTypes
 	label?: string
 	// CLASSNAMES
 	containerClassname?: string
