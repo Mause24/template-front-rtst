@@ -86,22 +86,17 @@ export const Login = (): JSX.Element => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.password}
+							className="outl"
 							error={
 								touched.password ? errors.password : undefined
 							}
 						/>
 
 						<Button
-							className={clsx(
-								"border-2",
-								"border-black",
-								"rounded"
-							)}
 							type="submit"
 							disabled={isSubmitting}
-						>
-							Iniciar Sesion
-						</Button>
+							title="Iniciar Sesion"
+						/>
 					</form>
 				)}
 			</Formik>

@@ -21,11 +21,13 @@ export const useHovers = <T extends HTMLElement>({
 
 	const setHandlers = () =>
 		refs.forEach((ref, index) => {
-			ref.current!.onmouseenter = ev => {
-				const currentTarget = ev.target as HTMLElement
-				onHoverIn(index, currentTarget.id)
+			if (ref.current) {
+				ref.current.onmouseenter = ev => {
+					const currentTarget = ev.target as HTMLElement
+					onHoverIn(index, currentTarget.id)
+				}
+				ref.current.onmouseleave = () => onHoverOut(index)
 			}
-			ref.current!.onmouseleave = () => onHoverOut(index)
 		})
 
 	useEffect(() => setHandlers(), [refs])
@@ -41,11 +43,13 @@ export const useHover = <T extends HTMLElement>({ ref }: UseHoverProps<T>) => {
 	const onHoverOut = () => setHovering(-1)
 
 	const setHandlers = () => {
-		ref.current!.onmouseenter = ev => {
-			const currentTarget = ev.target as HTMLElement
-			onHoverIn(currentTarget.id)
+		if (ref.current) {
+			ref.current!.onmouseenter = ev => {
+				const currentTarget = ev.target as HTMLElement
+				onHoverIn(currentTarget.id)
+			}
+			ref.current!.onmouseleave = () => onHoverOut()
 		}
-		ref.current!.onmouseleave = () => onHoverOut()
 	}
 
 	useEffect(() => setHandlers(), [ref])

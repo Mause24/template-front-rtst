@@ -1,4 +1,14 @@
-export type ButtonProps = React.DetailedHTMLProps<
-	React.ButtonHTMLAttributes<HTMLButtonElement>,
-	HTMLButtonElement
->
+export type ButtonVariants =
+	| "primary"
+	| "secondary"
+	| "outline"
+	| "transparent"
+	| "disabled"
+
+export interface ButtonProps
+	extends React.DetailedHTMLProps<
+		React.ButtonHTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	> {
+	variant?: ButtonVariants
+}

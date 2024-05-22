@@ -61,6 +61,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									"flex",
 									"w-full",
 									"h-full",
+									"items-center",
 									//PROPERTIES OF THE AFTER LINE OF THE LINKS
 									"after:content-['']",
 									"after:w-full",
@@ -97,6 +98,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 							className={clsx("flex", "relative")}
 						>
 							<Button
+								variant="transparent"
 								className={clsx(
 									"flex",
 									"w-full",
@@ -117,14 +119,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 								)}
 								onClick={deleteSession}
 							>
-								<Text
-									props={{
-										className: clsx("max-md:!text-base"),
-									}}
-									color="white"
-									size="lg"
-									type="span"
-								>
+								<Text color="white" size="lg" type="span">
 									Cerrar Sesion
 								</Text>
 							</Button>

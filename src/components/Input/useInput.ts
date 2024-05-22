@@ -32,9 +32,9 @@ export const useInput = (props: InputProps) => {
 			container: clsx(
 				"relative",
 				"[&>label:has(+input:focus-within)]:bg-white",
-				"[&>label:has(+input:focus-within)]:scale-[70%]",
-				"[&>label:has(+input:focus-within)]:translate-y-[-25px]",
-				"[&>label:has(+input:focus-within)]:translate-x-[-13px]"
+				"[&>label:has(+input:focus-within)]:!text-xs",
+				"[&>label:has(+input:focus-within)]:translate-y-[-20px]",
+				"[&>label:has(+input:focus-within)]:translate-x-[-5px]"
 			),
 			label: clsx(
 				"absolute",
@@ -48,9 +48,9 @@ export const useInput = (props: InputProps) => {
 				!isEmpty(value) &&
 					clsx(
 						"bg-white",
-						"scale-[70%]",
-						"translate-y-[-25px]",
-						"translate-x-[-13px]"
+						"!text-xs",
+						"translate-y-[-20px]",
+						"translate-x-[-5px]"
 					)
 			),
 			input: clsx(),
