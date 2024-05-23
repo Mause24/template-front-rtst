@@ -1,10 +1,10 @@
 import { Button, Input, Text } from "@/components"
 import clsx from "clsx"
 import { Formik } from "formik"
-import { useLogin } from "./useLogin"
+import { useRegister } from "./useRegister"
 
-export const Login = (): JSX.Element => {
-	const { onSubmit, validationSchema } = useLogin()
+export const Register = () => {
+	const { onSubmit, validationSchema } = useRegister()
 
 	return (
 		<div
@@ -19,8 +19,11 @@ export const Login = (): JSX.Element => {
 		>
 			<Formik
 				initialValues={{
+					name: "",
+					lastname: "",
 					email: "",
 					password: "",
+					confirmPassword: "",
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { setSubmitting }) => {
@@ -60,8 +63,38 @@ export const Login = (): JSX.Element => {
 								),
 							}}
 						>
-							Iniciar Sesion
+							Registro
 						</Text>
+
+						<Input
+							type="text"
+							label="Nombres"
+							id="name"
+							name="name"
+							autoComplete="name"
+							customType="googleInput"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.name}
+							error={touched.name ? errors.name : undefined}
+							required
+						/>
+
+						<Input
+							type="text"
+							label="Apellidos"
+							id="lastname"
+							autoComplete="family-name"
+							name="lastname"
+							customType="googleInput"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.lastname}
+							error={
+								touched.lastname ? errors.lastname : undefined
+							}
+							required
+						/>
 
 						<Input
 							type="email"
@@ -87,9 +120,25 @@ export const Login = (): JSX.Element => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.password}
-							className="outl"
 							error={
 								touched.password ? errors.password : undefined
+							}
+							required
+						/>
+						<Input
+							type="password"
+							label="Confirmar Contraseña"
+							id="confirmPassword"
+							name="confirmPassword"
+							customType="googleInput"
+							autoComplete="current-password"
+							onChange={handleChange}
+							onBlur={handleBlur}
+							value={values.confirmPassword}
+							error={
+								touched.confirmPassword
+									? errors.confirmPassword
+									: undefined
 							}
 							required
 						/>
@@ -97,7 +146,7 @@ export const Login = (): JSX.Element => {
 						<Button
 							type="submit"
 							disabled={isSubmitting}
-							title="Iniciar Sesion"
+							title="Registrar"
 						/>
 					</form>
 				)}

@@ -14,5 +14,6 @@ export const useProtectedRoute = (props: ProtectedRouteProps) => {
 		() => isLocked || !extraValidation(),
 		[isLocked, extraValidation()]
 	)
+
 	return { extraValidation, isCurrentLocked, redirect, children }
 }

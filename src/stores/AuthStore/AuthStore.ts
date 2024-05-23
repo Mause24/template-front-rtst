@@ -21,11 +21,13 @@ export const useAuthStore = create<AuthStoreProps>((set, get) => {
 		const { session } = get()
 		return !isEmpty(session)
 	}
+	const isAdmin = (): boolean => false
 
 	return {
 		session: currentLocalSession ?? ({} as Session),
 		deleteSession,
 		isAuth,
+		isAdmin,
 		setSession,
 	}
 })

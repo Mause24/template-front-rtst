@@ -15,11 +15,13 @@ export const Home = (): JSX.Element => {
 				"items-center"
 			)}
 		>
-			<img
-				className={clsx("h-96", "bg-cover")}
-				src={session.user.avatarImage}
-				alt="avatar"
-			/>
+			{session?.user?.avatarImage && (
+				<img
+					className={clsx("h-96", "bg-cover")}
+					src={session.user.avatarImage}
+					alt="avatar"
+				/>
+			)}
 		</div>
 	)
 }

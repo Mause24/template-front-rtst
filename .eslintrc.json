@@ -23,10 +23,13 @@
 		"semi": ["error", "never"],
 		"no-empty": "error",
 		"no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-		// disable the rule for all files
-		"@typescript-eslint/explicit-function-return-type": "off",
 		// TYPESCRIPT
-
+		"@typescript-eslint/explicit-function-return-type": [
+			"error",
+			{
+				"allowExpressions": true
+			}
+		],
 		"@typescript-eslint/no-explicit-any": [
 			"error",
 			{ "fixToUnknown": true }

@@ -19,7 +19,7 @@ export const useButton = (props: ButtonProps) => {
 		primary: {
 			button: clsx(
 				"bg-primary-normal",
-				"py-3",
+				"p-3",
 				"hover:bg-white",
 				"[&:hover>*]:text-primary-normal",
 				"hover:shadow-md"
@@ -29,7 +29,7 @@ export const useButton = (props: ButtonProps) => {
 		secondary: {
 			button: clsx(
 				"bg-white",
-				"py-3",
+				"p-3",
 				"hover:bg-primary-normal",
 				"[&:hover>*]:text-white",
 				"shadow-md"
@@ -39,7 +39,7 @@ export const useButton = (props: ButtonProps) => {
 		outline: {
 			button: clsx(
 				"bg-white",
-				"py-3",
+				"p-3",
 				"outline",
 				"outline-primary-normal",
 				"[&:hover>*]:font-bold",
@@ -51,7 +51,7 @@ export const useButton = (props: ButtonProps) => {
 		disabled: {
 			button: clsx(
 				"bg-gray-300",
-				"py-3",
+				"p-3",
 				"cursor-not-allowed",
 				"opacity-50"
 			),

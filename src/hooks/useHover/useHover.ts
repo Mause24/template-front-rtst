@@ -1,58 +1,62 @@
-import { times } from "lodash"
-import { useEffect, useState } from "react"
-import { UseHoverProps, UseHoversProps } from "./useHover.types"
+import { useEffect, useRef, useState } from "react"
+import { HoverRef, HoverRefs } from "./useHover.types"
 
-export const useHovers = <T extends HTMLElement>({
-	refs,
-}: UseHoversProps<T>) => {
-	const defaultValue = times(refs.length, () => -1)
-	const [hoverings, setHoverings] =
-		useState<(number | string)[]>(defaultValue)
+export const useHover = <T extends HTMLElement>(): [
+	React.RefObject<T>,
+	boolean,
+] => {
+	const [isHovered, setIsHovered] = useState<boolean>(false)
+	const ref = useRef<T>(null)
 
-	const onHoverIn = (index: number, value: number | string) => {
-		setHoverings(state =>
-			state.map((item, i) => (i !== index ? item : value))
-		)
-	}
+	const handleMouseEnter = () => setIsHovered(true)
+	const handleMouseLeave = () => setIsHovered(false)
 
-	const onHoverOut = (index: number) => {
-		setHoverings(state => state.map((item, i) => (i !== index ? item : -1)))
-	}
+	useEffect(() => {
+		const node = ref.current
+		if (node) {
+			node.addEventListener("mouseenter", handleMouseEnter)
+			node.addEventListener("mouseleave", handleMouseLeave)
 
-	const setHandlers = () =>
-		refs.forEach((ref, index) => {
-			if (ref.current) {
-				ref.current.onmouseenter = ev => {
-					const currentTarget = ev.target as HTMLElement
-					onHoverIn(index, currentTarget.id)
-				}
-				ref.current.onmouseleave = () => onHoverOut(index)
+			return () => {
+				node.removeEventListener("mouseenter", handleMouseEnter)
+				node.removeEventListener("mouseleave", handleMouseLeave)
+			}
+		}
+	}, [ref.current])
+
+	return [ref, isHovered]
+}
+
+export const useHovers = <T extends HTMLElement>(): [
+	HoverRefs<T>,
+	number | null,
+] => {
+	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+	const refs = useRef<HoverRef<T>[]>([])
+
+	const handleMouseEnter = (index: number) => () => setHoveredIndex(index)
+	const handleMouseLeave = () => setHoveredIndex(null)
+
+	useEffect(() => {
+		refs.current.forEach((node, index) => {
+			if (node) {
+				node.addEventListener("mouseenter", handleMouseEnter(index))
+				node.addEventListener("mouseleave", handleMouseLeave)
 			}
 		})
 
-	useEffect(() => setHandlers(), [refs])
-
-	return hoverings
-}
-
-export const useHover = <T extends HTMLElement>({ ref }: UseHoverProps<T>) => {
-	const [hovering, setHovering] = useState<number | string>(-1)
-
-	const onHoverIn = (index: number | string) => setHovering(index)
-
-	const onHoverOut = () => setHovering(-1)
-
-	const setHandlers = () => {
-		if (ref.current) {
-			ref.current!.onmouseenter = ev => {
-				const currentTarget = ev.target as HTMLElement
-				onHoverIn(currentTarget.id)
-			}
-			ref.current!.onmouseleave = () => onHoverOut()
+		return () => {
+			refs.current.forEach((node, index) => {
+				if (node) {
+					node.removeEventListener(
+						"mouseenter",
+						handleMouseEnter(index)
+					)
+					node.removeEventListener("mouseleave", handleMouseLeave)
+				}
+			})
 		}
-	}
+	}, [])
 
-	useEffect(() => setHandlers(), [ref])
-
-	return hovering
+	return [refs, hoveredIndex]
 }

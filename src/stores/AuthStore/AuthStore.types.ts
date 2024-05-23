@@ -17,5 +17,6 @@ export interface AuthStoreProps {
 	session: Session
 	setSession: (_newSession: Session) => void
 	isAuth: () => boolean
+	isAdmin: () => boolean
 	deleteSession: () => void
 }

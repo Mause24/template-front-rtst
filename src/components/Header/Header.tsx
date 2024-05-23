@@ -7,15 +7,8 @@ import { HeaderProps } from "./Header.types"
 import { useHeader } from "./useHeader"
 
 export const Header = (props: HeaderProps): JSX.Element => {
-	const {
-		hoverCloseButton,
-		hoverLinks,
-		refLinks,
-		refCloseButton,
-		linksArray,
-		isAuth,
-		deleteSession,
-	} = useHeader(props)
+	const { hovering, refs, linksArray, isAuth, deleteSession } =
+		useHeader(props)
 
 	return (
 		<header
@@ -55,7 +48,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 						<li key={item.id} className={clsx("flex", "relative")}>
 							<Link
 								id={String(item.id)}
-								ref={refLinks[index]}
+								ref={el => (refs.current[index + 1] = el)}
 								to={item.route}
 								className={clsx(
 									"flex",
@@ -72,14 +65,14 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									"after:duration-[400ms]",
 									"after:bottom-0",
 									"after:left-0",
-									Number(hoverLinks[index]) === item.id
+									hovering === index + 1
 										? "after:scale-x-100"
 										: "after:scale-x-0"
 								)}
 							>
 								<Text
 									props={{
-										className: clsx("max-md:!text-base"),
+										className: clsx("max-md:text-base"),
 									}}
 									color="white"
 									size="lg"
@@ -93,7 +86,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 					{isAuth() && (
 						<li
 							key={"close-session"}
-							ref={refCloseButton}
+							ref={el => (refs.current[0] = el)}
 							id="close-session"
 							className={clsx("flex", "relative")}
 						>
@@ -113,7 +106,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									"after:duration-[400ms]",
 									"after:bottom-0",
 									"after:left-0",
-									hoverCloseButton === "close-session"
+									hovering === 0
 										? "after:scale-x-100"
 										: "after:scale-x-0"
 								)}

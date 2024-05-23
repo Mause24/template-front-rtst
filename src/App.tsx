@@ -1,28 +1,19 @@
-import { Layout, MissingRoute, ProtectedRoute } from "@/components"
+import { Layout, ProtectedRoute } from "@/components"
 import "@/sass/index.scss"
 import { useAuthStore } from "@/stores"
 import { Route, Routes } from "react-router-dom"
 import { AdminRouter, PrivateRouter, PublicRouter } from "./routers"
 
 const App = (): JSX.Element => {
-	const { isAuth } = useAuthStore()
+	const { isAuth, isAdmin } = useAuthStore()
 
 	return (
 		<Layout>
 			<Routes>
 				{/* PUBLIC ROUTER */}
-
-				<Route
-					errorElement={<MissingRoute />}
-					index
-					path="/*"
-					element={<PublicRouter />}
-				/>
-
+				<Route index path="/*" element={<PublicRouter />} />
 				{/* PRIVATE ROUTER */}
-
 				<Route
-					errorElement={<MissingRoute />}
 					path="home/*"
 					element={
 						<ProtectedRoute redirect="/login" isLocked={!isAuth()}>
@@ -30,12 +21,14 @@ const App = (): JSX.Element => {
 						</ProtectedRoute>
 					}
 				/>
-
 				{/* ADMIN ROUTER */}
 				<Route
-					errorElement={<MissingRoute />}
 					path="admin/*"
-					element={<AdminRouter />}
+					element={
+						<ProtectedRoute redirect="/login" isLocked={!isAdmin()}>
+							<AdminRouter />
+						</ProtectedRoute>
+					}
 				/>
 			</Routes>
 		</Layout>

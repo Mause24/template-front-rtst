@@ -1,6 +1,6 @@
-import { ResponseBody } from "@/interfaces"
-import { Session, useAuthStore } from "@/stores"
-import axios from "axios"
+import { LoginServiceBody } from "@/interfaces"
+import { loginService } from "@/services"
+import { useAuthStore } from "@/stores"
 import * as Yup from "yup"
 
 export const useLogin = () => {
@@ -29,21 +29,13 @@ export const useLogin = () => {
 	})
 
 	const onSubmit = async (
-		values: {
-			email: string
-			password: string
-		},
+		values: LoginServiceBody,
 		setSubmitting: (isSubmitting: boolean) => void
 	): Promise<void> => {
 		try {
-			const response = await axios.post<ResponseBody<Session>>(
-				"/auth/login/",
-				values
-			)
+			const response = await loginService(values)
 
-			if (response.status === 200 && response.data.data) {
-				setSession(response.data.data)
-			}
+			setSession(response)
 		} catch (error) {
 			console.error(error)
 		} finally {

@@ -6,7 +6,6 @@ export const AdminRouter = (): JSX.Element => {
 		<Routes>
 			<Route path="admin">
 				<Route index element={<AdminLogin />} />
-				<Route path="register" element={<div>Register</div>} />
 			</Route>
 		</Routes>
 	)

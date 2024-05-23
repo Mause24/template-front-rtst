@@ -1,7 +1,7 @@
 import { useHover } from "@/hooks"
 import clsx from "clsx"
 import { isEmpty } from "lodash"
-import { useMemo, useRef } from "react"
+import { useMemo } from "react"
 import { InputProps } from "./Input.types"
 
 export const useInput = (props: InputProps) => {
@@ -18,9 +18,8 @@ export const useInput = (props: InputProps) => {
 		placeholder,
 		...rest
 	} = props
-	const refInput = useRef<HTMLInputElement>(null)
 
-	const hovering = useHover({ ref: refInput })
+	const [refInput, hovering] = useHover<HTMLInputElement>()
 
 	const stylesTypes = {
 		normal: {
@@ -65,7 +64,7 @@ export const useInput = (props: InputProps) => {
 	const stylesVariants = {
 		primary: clsx(
 			"focus-within:border-primary-normal",
-			hovering !== -1 ? "border-primary-normal" : "border-[#e5e7eb]"
+			hovering !== false ? "border-primary-normal" : "border-[#e5e7eb]"
 		),
 		secondary: clsx(""),
 	}
