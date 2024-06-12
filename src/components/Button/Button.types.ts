@@ -11,4 +11,5 @@ export interface ButtonProps
 		HTMLButtonElement
 	> {
 	variant?: ButtonVariants
+	label?: string
 }

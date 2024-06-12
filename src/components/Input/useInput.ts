@@ -16,10 +16,27 @@ export const useInput = (props: InputProps) => {
 		value,
 		label,
 		placeholder,
+		type,
 		...rest
 	} = props
 
 	const [refInput, hovering] = useHover<HTMLInputElement>()
+
+	const isNotEmptyInput = (
+		type: React.HTMLInputTypeAttribute | undefined,
+		_value: string | number | readonly string[] | undefined
+	) => {
+		switch (true) {
+			case type === "number":
+				return typeof value === "number" || !isEmpty(value)
+
+			case type === "date" || type === "datetime-local":
+				return true
+
+			default:
+				return !isEmpty(value)
+		}
+	}
 
 	const stylesTypes = {
 		normal: {
@@ -44,7 +61,7 @@ export const useInput = (props: InputProps) => {
 				"duration-[50ms]",
 				"ease-linear",
 				"pointer-events-none",
-				!isEmpty(value) &&
+				isNotEmptyInput(type, value) &&
 					clsx(
 						"bg-white",
 						"!text-xs",
@@ -71,7 +88,7 @@ export const useInput = (props: InputProps) => {
 
 	const styleType = useMemo(
 		() => stylesTypes[customType],
-		[customType, value]
+		[customType, value, type]
 	)
 
 	const styleVariant = useMemo(
@@ -89,7 +106,9 @@ export const useInput = (props: InputProps) => {
 		currentPlaceholder,
 		id,
 		error,
+		value,
 		refInput,
+		type,
 		rest,
 	}
 }

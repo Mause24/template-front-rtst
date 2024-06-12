@@ -40,7 +40,7 @@ export const MissingRoute = (): JSX.Element => {
 
 			<Button
 				onClick={handleGoBack}
-				title="Volver a la página principal"
+				label="Volver a la página principal"
 			/>
 		</div>
 	)

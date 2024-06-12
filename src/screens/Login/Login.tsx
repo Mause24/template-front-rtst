@@ -87,7 +87,6 @@ export const Login = (): JSX.Element => {
 							onChange={handleChange}
 							onBlur={handleBlur}
 							value={values.password}
-							className="outl"
 							error={
 								touched.password ? errors.password : undefined
 							}
@@ -97,7 +96,7 @@ export const Login = (): JSX.Element => {
 						<Button
 							type="submit"
 							disabled={isSubmitting}
-							title="Iniciar Sesion"
+							label="Iniciar Sesion"
 						/>
 					</form>
 				)}

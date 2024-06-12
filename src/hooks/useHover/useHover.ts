@@ -29,12 +29,15 @@ export const useHover = <T extends HTMLElement>(): [
 
 export const useHovers = <T extends HTMLElement>(): [
 	HoverRefs<T>,
-	number | null,
+	number | string | null,
 ] => {
-	const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+	const [hoveredIndex, setHoveredIndex] = useState<number | string | null>(
+		null
+	)
 	const refs = useRef<HoverRef<T>[]>([])
 
-	const handleMouseEnter = (index: number) => () => setHoveredIndex(index)
+	const handleMouseEnter = (index: number | string) => () =>
+		setHoveredIndex(index)
 	const handleMouseLeave = () => setHoveredIndex(null)
 
 	useEffect(() => {

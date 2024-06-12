@@ -3,16 +3,13 @@ import {
 	RegisterServiceBody,
 	ResponseBody,
 } from "@/interfaces"
+import { API } from "@/providers"
 import { Session } from "@/stores"
-import axios from "axios"
 
 export const loginService = async (
 	body: LoginServiceBody
 ): Promise<Session> => {
-	const response = await axios.post<ResponseBody<Session>>(
-		"/auth/login/",
-		body
-	)
+	const response = await API.post<ResponseBody<Session>>("/auth/login/", body)
 
 	if (response.status === 200 && response.data.data) {
 		return response.data.data
@@ -22,7 +19,7 @@ export const loginService = async (
 }
 
 export const registerService = async (body: RegisterServiceBody) => {
-	const response = await axios.post<ResponseBody<Session>>(
+	const response = await API.post<ResponseBody<Session>>(
 		"/auth/register/",
 		body
 	)

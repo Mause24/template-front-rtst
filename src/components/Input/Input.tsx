@@ -16,6 +16,8 @@ export const Input = (props: InputProps) => {
 		currentPlaceholder,
 		error,
 		rest,
+		value,
+		type,
 	} = useInput(props)
 
 	return (
@@ -47,6 +49,8 @@ export const Input = (props: InputProps) => {
 			<input
 				ref={refInput}
 				id={id ?? label}
+				value={value}
+				type={type}
 				className={clsx(
 					"border-2",
 					"pl-3",
