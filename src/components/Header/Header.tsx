@@ -33,13 +33,15 @@ export const Header = (props: HeaderProps): JSX.Element => {
 				)}
 			>
 				<img src={IMAGES.logo} className={clsx("h-14")} alt="logo" />
-				<Text
-					props={{ className: clsx("max-md:!text-lg") }}
-					color="white"
-					type="h1"
-				>
-					Soccer Corp
-				</Text>
+				<div className="max-md:hidden">
+					<Text
+						props={{ className: clsx("max-md:!text-lg") }}
+						color="white"
+						type="h1"
+					>
+						Soccer Corp
+					</Text>
+				</div>
 			</div>
 
 			<nav className={clsx("flex")}>
