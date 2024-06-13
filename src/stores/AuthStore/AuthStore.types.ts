@@ -1,6 +1,8 @@
+import { PROFILES } from "@/interfaces"
+
 export interface Session {
-	user: User
 	token: string
+	user: User
 }
 
 export interface User {
@@ -9,8 +11,14 @@ export interface User {
 	lastname: string
 	email: string
 	password: string
-	avatarImage: string
+	avatarImage: null
 	profileId: number
+	Profile: Profile
+}
+
+export interface Profile {
+	id: number
+	name: keyof typeof PROFILES
 }
 
 export interface AuthStoreProps {

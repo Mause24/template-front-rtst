@@ -149,7 +149,7 @@ export const Register = () => {
 						<Button
 							type="submit"
 							disabled={isSubmitting}
-							title="Registrar"
+							label="Registrar"
 						/>
 					</form>
 				)}

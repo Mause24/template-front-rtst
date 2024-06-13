@@ -1,3 +1,4 @@
+import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/Constants"
 import { useAuthStore } from "@/stores"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -11,18 +12,18 @@ export const useLayout = (props: LayoutProps) => {
 	const navigate = useNavigate()
 
 	// Define las rutas permitidas
-	const adminRoutes = ["/admin"]
-	const authRoutes = ["/home"]
-	const publicRoutes = ["/login", "/register"]
+	const privateRoutes = PRIVATE_ROUTES.map(item => item.route)
+	const adminRoutes = ADMIN_ROUTES.map(item => item.route)
+	const publicRoutes = PUBLIC_ROUTES.map(item => item.route)
 
 	useEffect(() => {
 		const currentPath = location.pathname
 
 		switch (true) {
 			case isAdmin() && !adminRoutes.includes(currentPath):
-				navigate("/admin")
+				navigate("/home")
 				break
-			case isAuth() && !authRoutes.includes(currentPath):
+			case !isAdmin() && isAuth() && !privateRoutes.includes(currentPath):
 				navigate("/home")
 				break
 			case !isAuth() && !isAdmin():

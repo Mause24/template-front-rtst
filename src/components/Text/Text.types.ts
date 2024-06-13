@@ -1,3 +1,5 @@
+import React from "react"
+
 export type TextTypes = {
 	abbr: React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLElement>,
@@ -116,19 +118,19 @@ export type TextTypes = {
 }
 
 export enum TextSizes {
-	"xs" = "text-xs",
-	"sm" = "text-sm",
-	"base" = "text-base",
-	"lg" = "text-lg",
-	"xl" = "text-xl",
-	"2xl" = "text-2xl",
-	"3xl" = "text-3xl",
-	"4xl" = "text-4xl",
-	"5xl" = "text-5xl",
-	"6xl" = "text-6xl",
-	"7xl" = "text-7xl",
-	"8xl" = "text-8xl",
-	"9xl" = "text-9xl",
+	"xs" = "!text-xs",
+	"sm" = "!text-sm",
+	"base" = "!text-base",
+	"lg" = "!text-lg",
+	"xl" = "!text-xl",
+	"2xl" = "!text-2xl",
+	"3xl" = "!text-3xl",
+	"4xl" = "!text-4xl",
+	"5xl" = "!text-5xl",
+	"6xl" = "!text-6xl",
+	"7xl" = "!text-7xl",
+	"8xl" = "!text-8xl",
+	"9xl" = "!text-9xl",
 }
 
 export enum TextColors {
@@ -157,7 +159,7 @@ export enum TextWeights {
 
 export interface TextProps<T extends keyof TextTypes> {
 	type: T
-	children: string
+	children: string | React.ReactNode | React.ReactNode[]
 	props?: Partial<TextTypes[T]>
 	weight?: keyof typeof TextWeights
 	size?: keyof typeof TextSizes

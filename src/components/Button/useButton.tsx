@@ -6,7 +6,7 @@ import { ButtonProps, ButtonVariants } from "./Button.types"
 export const useButton = (props: ButtonProps) => {
 	const {
 		className,
-		title,
+		label,
 		children,
 		variant = "primary",
 		disabled,
@@ -80,7 +80,7 @@ export const useButton = (props: ButtonProps) => {
 
 	const renderChild = useMemo<JSX.Element>(
 		() =>
-			title ? (
+			label ? (
 				<Text
 					size="xl"
 					type="span"
@@ -95,12 +95,12 @@ export const useButton = (props: ButtonProps) => {
 						),
 					}}
 				>
-					{title}
+					{label}
 				</Text>
 			) : (
 				(children as JSX.Element)
 			),
-		[children, title, variant, disabled]
+		[children, label, variant, disabled]
 	)
 
 	return {

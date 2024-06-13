@@ -1,3 +1,3 @@
 export interface HeaderProps {
-	isAdmin?: boolean
+	rightMenu?: boolean
 }
