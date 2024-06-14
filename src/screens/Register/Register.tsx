@@ -12,6 +12,8 @@ export const Register = () => {
 				"w-full",
 				"min-h-[calc(100dvh-290px)]",
 				"py-2",
+				"px-6",
+				"2xl:px-0",
 				"flex",
 				"justify-center",
 				"items-center"
@@ -45,7 +47,8 @@ export const Register = () => {
 							"flex",
 							"flex-col",
 							"gap-y-4",
-							"w-[50%]",
+							"2xl:w-[50%]",
+							"w-full",
 							"border-2",
 							"shadow-md",
 							"px-3",

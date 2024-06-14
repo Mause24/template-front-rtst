@@ -14,7 +14,8 @@ export const Login = (): JSX.Element => {
 				"py-2",
 				"flex",
 				"justify-center",
-				"items-center"
+				"items-center",
+				"px-6"
 			)}
 		>
 			<Formik
@@ -42,7 +43,8 @@ export const Login = (): JSX.Element => {
 							"flex",
 							"flex-col",
 							"gap-y-4",
-							"w-[50%]",
+							"2xl:w-[50%]",
+							"w-full",
 							"border-2",
 							"shadow-md",
 							"px-3",
