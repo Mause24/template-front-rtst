@@ -1,10 +1,22 @@
 import { LoginServiceBody } from "@/interfaces"
 import { loginService } from "@/services"
 import { useAuthStore } from "@/stores"
+import { useState } from "react"
 import * as Yup from "yup"
+
+interface AlertMessagesProps {
+	show: boolean
+	message: string
+	severity: "success" | "error"
+}
 
 export const useLogin = () => {
 	const { setSession } = useAuthStore()
+	const [alert, setAlert] = useState<AlertMessagesProps>({
+		show: false,
+		message: "",
+		severity: "success",
+	})
 
 	const validationSchema = Yup.object({
 		email: Yup.string()
@@ -34,17 +46,29 @@ export const useLogin = () => {
 	): Promise<void> => {
 		try {
 			const response = await loginService(values)
-
+			setAlert({
+				severity: "success",
+				show: true,
+				message: "Bienvenido a brooking mi rey hermoso",
+			})
 			setSession(response)
 		} catch (error) {
 			console.error(error)
 		} finally {
 			setSubmitting(false)
+			setAlert({
+				severity: "error",
+				show: true,
+				message:
+					"Error en la autenticación. Por favor, inténtelo de nuevo.",
+			})
 		}
 	}
 
 	return {
 		validationSchema,
 		onSubmit,
+		alert,
+		setAlert,
 	}
 }
