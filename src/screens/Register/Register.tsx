@@ -1,10 +1,11 @@
 import { Button, Input, Text } from "@/components"
+import { Alert, Snackbar } from "@mui/material"
 import clsx from "clsx"
 import { Formik } from "formik"
 import { useRegister } from "./useRegister"
 
 export const Register = () => {
-	const { onSubmit, validationSchema } = useRegister()
+	const { onSubmit, validationSchema, setAlert, alert } = useRegister()
 
 	return (
 		<div
@@ -154,6 +155,28 @@ export const Register = () => {
 					</form>
 				)}
 			</Formik>
+			{alert.show && (
+				<>
+					<Snackbar
+						open={alert.show}
+						autoHideDuration={6000}
+						onClose={() => setAlert({ ...alert, show: false })}
+						anchorOrigin={{
+							vertical: "top",
+							horizontal: "center",
+						}}
+					>
+						<Alert
+							onClose={() => setAlert({ ...alert, show: false })}
+							severity="error"
+							variant="filled"
+							sx={{ width: "100%" }}
+						>
+							{alert.message}
+						</Alert>
+					</Snackbar>
+				</>
+			)}
 		</div>
 	)
 }

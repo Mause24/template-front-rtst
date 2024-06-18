@@ -1,8 +1,20 @@
 import { RegisterServiceBody } from "@/interfaces"
 import { registerService } from "@/services"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import * as Yup from "yup"
+
+interface AlertMessagesProps {
+	show: boolean
+	message: string
+	severity: "success" | "error"
+}
 export const useRegister = () => {
+	const [alert, setAlert] = useState<AlertMessagesProps>({
+		show: false,
+		message: "",
+		severity: "success",
+	})
 	const navigate = useNavigate()
 
 	const validationSchema = Yup.object({
@@ -48,16 +60,28 @@ export const useRegister = () => {
 			})
 			if (response) {
 				navigate("/login")
+				setAlert({
+					severity: "success",
+					show: true,
+					message: "Bienvenido a brooking",
+				})
 			}
 		} catch (error) {
 			console.error(error)
 		} finally {
 			setSubmitting(false)
+			setAlert({
+				severity: "error",
+				show: true,
+				message: "Error en el registro. Por favor, inténtelo de nuevo.",
+			})
 		}
 	}
 
 	return {
 		validationSchema,
 		onSubmit,
+		alert,
+		setAlert,
 	}
 }
