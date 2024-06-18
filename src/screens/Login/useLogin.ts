@@ -49,7 +49,7 @@ export const useLogin = () => {
 			setAlert({
 				severity: "success",
 				show: true,
-				message: "Bienvenido a brooking mi rey hermoso",
+				message: "Bienvenido a brooking",
 			})
 			setSession(response)
 		} catch (error) {
