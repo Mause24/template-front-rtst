@@ -1,10 +1,9 @@
 "use client"
 
-import { ICONS } from "@/Constants/Icons"
 import clsx from "clsx"
 import { useMemo } from "react"
 import { createPortal } from "react-dom"
-import { Icon } from "../Icon"
+import { IoClose } from "react-icons/io5"
 import { CustomModalProps } from "./Modal.types"
 
 export const CustomModal = ({
@@ -186,17 +185,16 @@ export const CustomModal = ({
 							)}
 							onClick={onClose}
 						>
-							<Icon
-								src={ICONS.closeIcon}
-								fillPath
-								className={clsx(
-									"!w-5",
-									"!h-5",
-									"transition-all",
-									"duration-75",
-									"text-gray-600"
-								)}
-							/>
+							<div className={clsx("text-gray-600")}>
+								<IoClose
+									className={clsx(
+										"w-5",
+										"h-5",
+										"transition-all",
+										"duration-75"
+									)}
+								/>
+							</div>
 						</button>
 					)}
 					{children}

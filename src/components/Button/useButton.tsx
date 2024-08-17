@@ -10,6 +10,8 @@ export const useButton = (props: ButtonProps) => {
 		children,
 		variant = "primary",
 		disabled,
+		leftIcon,
+		rightIcon,
 		...rest
 	} = props
 
@@ -70,6 +72,9 @@ export const useButton = (props: ButtonProps) => {
 				"transition-all",
 				"duration-[200ms]",
 				"ease-linear",
+				"flex",
+				"justify-center",
+				"items-center",
 				disabled
 					? buttonVariantsStyles["disabled"].button
 					: buttonVariantsStyles[variant].button,
@@ -79,28 +84,33 @@ export const useButton = (props: ButtonProps) => {
 	)
 
 	const renderChild = useMemo<JSX.Element>(
-		() =>
-			label ? (
-				<Text
-					size="xl"
-					type="span"
-					props={{
-						className: clsx(
-							"transition-all",
-							"duration-[200ms]",
-							"ease-linear",
-							disabled
-								? buttonVariantsStyles["disabled"].label
-								: buttonVariantsStyles[variant].label
-						),
-					}}
-				>
-					{label}
-				</Text>
-			) : (
-				(children as JSX.Element)
-			),
-		[children, label, variant, disabled]
+		() => (
+			<>
+				{leftIcon && <div>{leftIcon}</div>}
+				{label ? (
+					<Text
+						size="xl"
+						type="span"
+						props={{
+							className: clsx(
+								"transition-all",
+								"duration-[200ms]",
+								"ease-linear",
+								disabled
+									? buttonVariantsStyles["disabled"].label
+									: buttonVariantsStyles[variant].label
+							),
+						}}
+					>
+						{label}
+					</Text>
+				) : (
+					(children as JSX.Element)
+				)}
+				{rightIcon && <div>{rightIcon}</div>}
+			</>
+		),
+		[children, label, variant, disabled, leftIcon, rightIcon]
 	)
 
 	return {

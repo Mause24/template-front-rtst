@@ -30,8 +30,8 @@ export const useAuthStore = create<AuthStoreProps>((set, get) => {
 
 		return (
 			!isEmpty(session) &&
-			session.user.Profile.id === PROFILES.ADMIN &&
-			session.user.Profile.name === "ADMIN"
+			session.user?.Profile?.id === PROFILES.ADMIN &&
+			session.user?.Profile?.name === "ADMIN"
 		)
 	}
 
