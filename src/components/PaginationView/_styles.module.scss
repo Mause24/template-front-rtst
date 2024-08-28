@@ -1,0 +1,20 @@
+.animation_slide {
+	&_right {
+		animation: slide-right 700ms;
+	}
+	&_left {
+		animation: slide-left 700ms;
+	}
+}
+
+@keyframes slide-left {
+	100% {
+		transform: translateX(0);
+	}
+}
+
+@keyframes slide-right {
+	100% {
+		transform: translateX(-200%);
+	}
+}

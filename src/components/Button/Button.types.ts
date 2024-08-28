@@ -12,4 +12,6 @@ export interface ButtonProps
 	> {
 	variant?: ButtonVariants
 	label?: string
+	leftIcon?: JSX.Element
+	rightIcon?: JSX.Element
 }

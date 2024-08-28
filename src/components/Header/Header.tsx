@@ -17,6 +17,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 		rightMenu,
 		isMenuOpen,
 		toggleMenu,
+		isMobileScreen,
 	} = useHeader(props)
 
 	return (
@@ -42,11 +43,13 @@ export const Header = (props: HeaderProps): JSX.Element => {
 					rightMenu && "order-2"
 				)}
 			>
-				<HamburgerMenu
-					className="md:hidden text-white"
-					handleOpen={toggleMenu}
-					isOpen={isMenuOpen}
-				/>
+				{isMobileScreen && (
+					<HamburgerMenu
+						className="text-white"
+						handleOpen={toggleMenu}
+						isOpen={isMenuOpen}
+					/>
+				)}
 
 				<nav
 					className={clsx(
@@ -55,13 +58,16 @@ export const Header = (props: HeaderProps): JSX.Element => {
 						"transition-all",
 						"duration-[400ms]",
 						"z-20",
-						//RESPONSIVE DESIGN
-						"max-md:absolute",
-						"max-md:top-[80px]",
-						"max-md:left-0",
-						"max-md:h-[calc(100%-80px)]",
-						"max-md:bg-inherit",
-						isMenuOpen ? "max-md:w-[80%]" : "max-md:w-0"
+
+						isMobileScreen &&
+							clsx(
+								"absolute",
+								"top-[80px]",
+								"left-0",
+								"h-[calc(100%-80px)]",
+								"bg-inherit",
+								isMenuOpen ? "w-[80%]" : "w-0"
+							)
 					)}
 				>
 					<ul
@@ -71,11 +77,12 @@ export const Header = (props: HeaderProps): JSX.Element => {
 							"gap-x-4",
 							"transition-all",
 							"duration-[200ms]",
-							"max-md:flex-col",
-							"max-md:w-full",
-							isMenuOpen
-								? "max-md:opacity-100"
-								: "max-md:opacity-0"
+							isMobileScreen &&
+								clsx(
+									"flex-col",
+									"w-full",
+									isMenuOpen ? "opacity-100" : "opacity-0"
+								)
 						)}
 					>
 						{linksArray.map((item, index) => (
@@ -84,7 +91,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 								className={clsx(
 									"flex",
 									"relative",
-									"max-md:w-full"
+									isMobileScreen && "w-full"
 								)}
 							>
 								<Link
@@ -114,11 +121,13 @@ export const Header = (props: HeaderProps): JSX.Element => {
 								>
 									<Text
 										props={{
-											className: clsx(
-												"max-md:text-base",
-												"max-md:w-full",
-												"max-md:text-center"
-											),
+											className: isMobileScreen
+												? clsx(
+														"text-base",
+														"w-full",
+														"text-center"
+													)
+												: "",
 										}}
 										color="white"
 										size="lg"
@@ -132,23 +141,22 @@ export const Header = (props: HeaderProps): JSX.Element => {
 						{isAuth() && (
 							<li
 								key={"close-session"}
-								ref={el => (refs.current[0] = el)}
 								id="close-session"
 								className={clsx(
 									"flex",
 									"relative",
-									"max-md:flex-1",
-									"max-md:items-end"
+									isMobileScreen &&
+										clsx("flex-1", "items-end")
 								)}
 							>
 								<Button
+									ref={el => (refs.current[0] = el)}
 									variant="transparent"
 									className={clsx(
 										"flex",
 										"w-full",
-										"h-full",
 										//Responsive
-										"max-md:h-10",
+										isMobileScreen ? "h-10" : "h-full",
 										//PROPERTIES OF THE AFTER LINE OF THE LINKS
 										"after:content-['']",
 										"after:w-full",
@@ -157,7 +165,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 										"after:origin-left",
 										"after:transition-all",
 										"after:duration-[400ms]",
-										"after:bottom-0",
+										"after:bottom-1",
 										"after:left-0",
 										hovering === 0
 											? "after:scale-x-100"
@@ -167,11 +175,13 @@ export const Header = (props: HeaderProps): JSX.Element => {
 								>
 									<Text
 										props={{
-											className: clsx(
-												"max-md:text-base",
-												"max-md:w-full",
-												"max-md:text-center"
-											),
+											className: isMobileScreen
+												? clsx(
+														"text-base",
+														"w-full",
+														"text-center"
+													)
+												: "",
 										}}
 										color="white"
 										size="lg"
@@ -197,7 +207,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 			>
 				<img
 					src={IMAGES.logo}
-					className="w-44 max-md:w-32"
+					className={clsx("w-44", isMobileScreen && "w-32")}
 					alt="logo"
 				/>
 			</div>
