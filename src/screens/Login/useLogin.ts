@@ -54,14 +54,14 @@ export const useLogin = () => {
 			setSession(response)
 		} catch (error) {
 			console.error(error)
-		} finally {
-			setSubmitting(false)
 			setAlert({
 				severity: "error",
 				show: true,
 				message:
 					"Error en la autenticación. Por favor, inténtelo de nuevo.",
 			})
+		} finally {
+			setSubmitting(false)
 		}
 	}
 
