@@ -1,1 +1,1 @@
-export * from "./PaginationView";
+export * from "./PaginationView"

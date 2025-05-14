@@ -1,9 +1,10 @@
-import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/Constants"
+import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants"
 import { useHovers } from "@/hooks"
 import { useAuthStore } from "@/stores"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { HeaderProps } from "./Header.types"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useHeader = (props: HeaderProps) => {
 	const { rightMenu } = props
 	const { isAuth, deleteSession, isAdmin } = useAuthStore()
@@ -12,11 +13,11 @@ export const useHeader = (props: HeaderProps) => {
 	const pageRef = useRef(window)
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-	const toggleMenu = () => {
+	const toggleMenu = (): void => {
 		setIsMenuOpen(!isMenuOpen)
 	}
 
-	const onDeleteSession = () => {
+	const onDeleteSession = (): void => {
 		deleteSession()
 		toggleMenu()
 	}
@@ -43,7 +44,7 @@ export const useHeader = (props: HeaderProps) => {
 			}
 		})
 
-		return () => {
+		return (): void => {
 			pageRef.current.removeEventListener("resize", () => {})
 		}
 	}, [linksArray, pageRef.current])

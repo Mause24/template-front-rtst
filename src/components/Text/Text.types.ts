@@ -133,18 +133,6 @@ export enum TextSizes {
 	"9xl" = "!text-9xl",
 }
 
-export enum TextColors {
-	inherit = "text-inherit",
-	current = "text-current",
-	transparent = "text-transparent",
-	primary = "text-primary-normal",
-	secondary = "text-secondary-normal",
-	black = "text-black",
-	white = "text-white",
-	blue = "text-blue-600",
-	red = "text-red-400",
-}
-
 export enum TextWeights {
 	thin = "font-thin",
 	extralight = "font-extralight",
@@ -157,11 +145,11 @@ export enum TextWeights {
 	black = "font-black",
 }
 
-export interface TextProps<T extends keyof TextTypes> {
-	type: T
+export interface TextProps<T extends keyof Omit<TextTypes, "className">> {
+	type?: T
 	children: string | React.ReactNode | React.ReactNode[]
-	props?: Partial<TextTypes[T]>
+	props?: Partial<Omit<TextTypes[T], "className">>
 	weight?: keyof typeof TextWeights
 	size?: keyof typeof TextSizes
-	color?: keyof typeof TextColors
+	className?: string
 }

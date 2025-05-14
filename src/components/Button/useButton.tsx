@@ -3,6 +3,7 @@ import { useMemo } from "react"
 import { Text } from "../Text"
 import { ButtonProps, ButtonVariants } from "./Button.types"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useButton = (props: ButtonProps) => {
 	const {
 		className,
@@ -20,10 +21,12 @@ export const useButton = (props: ButtonProps) => {
 	} = {
 		primary: {
 			button: clsx(
-				"bg-primary-normal",
+				"bg-light-primary-normal",
+				"dark:bg-light-secondary-navBar",
 				"p-3",
 				"hover:bg-white",
-				"[&:hover>*]:text-primary-normal",
+				"[&:hover>*]:text-light-primary-normal",
+				"[&:hover>*]:dark:text-black",
 				"hover:shadow-md"
 			),
 			label: clsx("text-white"),
@@ -32,23 +35,23 @@ export const useButton = (props: ButtonProps) => {
 			button: clsx(
 				"bg-white",
 				"p-3",
-				"hover:bg-primary-normal",
+				"hover:bg-light-primary-normal",
 				"[&:hover>*]:text-white",
 				"shadow-md"
 			),
-			label: clsx("text-primary-normal"),
+			label: clsx("text-light-primary-normal"),
 		},
 		outline: {
 			button: clsx(
 				"bg-white",
 				"p-3",
 				"outline",
-				"outline-primary-normal",
+				"outline-light-primary-normal",
 				"[&:hover>*]:font-bold",
 				"duration-[100ms]",
 				"hover:outline-4"
 			),
-			label: clsx("text-primary-normal", "duration-[100ms]"),
+			label: clsx("text-light-primary-normal", "duration-[100ms]"),
 		},
 		disabled: {
 			button: clsx(
@@ -90,17 +93,14 @@ export const useButton = (props: ButtonProps) => {
 				{label ? (
 					<Text
 						size="xl"
-						type="span"
-						props={{
-							className: clsx(
-								"transition-all",
-								"duration-[200ms]",
-								"ease-linear",
-								disabled
-									? buttonVariantsStyles["disabled"].label
-									: buttonVariantsStyles[variant].label
-							),
-						}}
+						className={clsx(
+							"transition-all",
+							"duration-[200ms]",
+							"ease-linear",
+							disabled
+								? buttonVariantsStyles["disabled"].label
+								: buttonVariantsStyles[variant].label
+						)}
 					>
 						{label}
 					</Text>

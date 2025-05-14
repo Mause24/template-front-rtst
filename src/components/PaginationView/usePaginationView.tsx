@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { Skeleton } from "../Skeleton"
 import { PaginationViewProps } from "./PaginationView.type"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const usePaginationView = <T,>(props: PaginationViewProps<T>) => {
 	const {
 		onPressNext,
@@ -24,7 +25,7 @@ export const usePaginationView = <T,>(props: PaginationViewProps<T>) => {
 	} = props
 
 	const refContainerItems = useRef<HTMLDivElement>(null)
-	const refSlider = useRef<HTMLDivElement>(null)
+	// const refSlider = useRef<HTMLDivElement>(null)
 	/* const [prevIndex, setPrevIndex] = useState<number | undefined>() */
 	const [currentSizeItemsContainer, setCurrentSizeItemsContainer] = useState({
 		width: refContainerItems.current?.clientWidth,
@@ -35,7 +36,7 @@ export const usePaginationView = <T,>(props: PaginationViewProps<T>) => {
 		() =>
 			data
 				.slice(0, cols * rows)
-				.map((item, index) => renderComponent?.(item, index)),
+				.map((item, index) => renderComponent(item, index)),
 		[data, renderComponent]
 	)
 
@@ -73,7 +74,7 @@ export const usePaginationView = <T,>(props: PaginationViewProps<T>) => {
 			height: refContainerItems.current?.clientHeight,
 		})
 
-		const handleResize = () => {
+		const handleResize = (): void => {
 			setCurrentSizeItemsContainer({
 				width: refContainerItems.current?.clientWidth,
 				height: refContainerItems.current?.clientHeight,
@@ -82,7 +83,7 @@ export const usePaginationView = <T,>(props: PaginationViewProps<T>) => {
 
 		window.addEventListener("resize", handleResize)
 
-		return () => {
+		return (): void => {
 			window.removeEventListener("resize", handleResize)
 		}
 	}, [])

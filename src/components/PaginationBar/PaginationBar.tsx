@@ -1,18 +1,19 @@
 import clsx from "clsx"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa"
 import { Button } from "../Button"
-import { PaginationBarsProps } from "./PaginationBar.type"
+import { PaginationBarItems } from "../PaginationBarItems"
+import { PaginationBarsProps } from "./PaginationBar.types"
 import { usePaginationBar } from "./usePaginationBar"
 
-export const PaginationBar = (props: PaginationBarsProps) => {
+export const PaginationBar = (props: PaginationBarsProps): JSX.Element => {
 	const {
 		onNext,
 		onPrevious,
-		renderPages,
-		currentIndex,
-		onPagination,
+		index,
 		paginationBarVariantsStyles,
 		variants,
+		currentSize,
+		onPagination,
 	} = usePaginationBar(props)
 
 	return (
@@ -25,7 +26,7 @@ export const PaginationBar = (props: PaginationBarsProps) => {
 		>
 			<Button
 				className={paginationBarVariantsStyles[variants].prevButton}
-				onClick={onPrevious(currentIndex)}
+				onClick={onPrevious(index)}
 				variant="transparent"
 				leftIcon={
 					<FaChevronLeft
@@ -35,59 +36,15 @@ export const PaginationBar = (props: PaginationBarsProps) => {
 			>
 				Previous
 			</Button>
-			<ul
-				className={clsx(
-					"flex",
-					"overflow-hidden",
-					paginationBarVariantsStyles[variants].itemButtonsContainer
-				)}
-			>
-				{renderPages.map(item => (
-					<li
-						className={clsx(
-							"flex",
-							"items-center",
-							"justify-center",
-							paginationBarVariantsStyles[variants].itemButtons,
-							currentIndex === item.value &&
-								paginationBarVariantsStyles[variants]
-									.itemButtonSelected.button
-						)}
-						key={item.key}
-					>
-						{item.value === "..." || typeof item === "string" ? (
-							<span
-								className={clsx(
-									"w-full",
-									"h-full",
-									"flex",
-									"items-center",
-									"justify-center"
-								)}
-							>
-								{item.value}
-							</span>
-						) : (
-							<Button
-								className={clsx(
-									"w-full",
-									"h-full",
-									currentIndex === item.value &&
-										paginationBarVariantsStyles[variants]
-											.itemButtonSelected.label
-								)}
-								onClick={onPagination(Number(item.value))}
-								variant="transparent"
-							>
-								{item.value}
-							</Button>
-						)}
-					</li>
-				))}
-			</ul>
+			<PaginationBarItems
+				key={String(index)}
+				index={index}
+				onChangeIndex={onPagination}
+				size={currentSize}
+			/>
 			<Button
 				className={paginationBarVariantsStyles[variants].nextButton}
-				onClick={onNext(currentIndex)}
+				onClick={onNext(index)}
 				variant="transparent"
 				rightIcon={
 					<FaChevronRight

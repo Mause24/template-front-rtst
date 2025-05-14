@@ -5,7 +5,7 @@ export interface PaginationViewProps<T> extends PaginationBarsProps {
 	cols?: number
 	rows?: number
 	minWidthItems?: number
-	renderComponent?: (item: T, index: number) => JSX.Element | JSX.Element[]
+	renderComponent: (item: T, index: number) => JSX.Element | JSX.Element[]
 	keyStractor?: (item: T, index: number) => string | number
 	emptyState?: JSX.Element
 	loadingState?: JSX.Element

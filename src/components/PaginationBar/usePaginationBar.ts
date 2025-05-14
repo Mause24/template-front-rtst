@@ -1,22 +1,21 @@
 import clsx from "clsx"
-import { times } from "lodash"
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import {
 	PaginationBarsProps,
 	PaginationBarVariants,
-} from "./PaginationBar.type"
+} from "./PaginationBar.types"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const usePaginationBar = (props: PaginationBarsProps) => {
 	const {
 		size = 1,
 		onPressNext,
 		onPressPage,
 		onPressPrevious,
-		index = 1,
+		index = 0,
 		variants = "primary",
 	} = props
 	const [currentSize, setCurrentSize] = useState(size)
-	const [currentIndex, setCurrentIndex] = useState(index)
 
 	const paginationBarVariantsStyles: {
 		[key in PaginationBarVariants]: {
@@ -83,81 +82,34 @@ export const usePaginationBar = (props: PaginationBarsProps) => {
 		},
 	}
 
-	const renderPages = useMemo(() => {
-		const parseArrayIndex = (
-			array: { key: string; value: number }[]
-		): { key: string; value: string | number }[] => {
-			switch (true) {
-				case array.length < 11:
-					return array
-				case currentIndex <= 5:
-					return [
-						...array.filter(item => item.value <= 7),
-						{ key: "idk-1", value: "..." },
-						...array.slice(array.length - 2),
-					]
-				case currentIndex > 5 && currentIndex < array.length - 4:
-					return [
-						...array.slice(0, 2),
-						{ key: "idk-1", value: "..." },
-						...array.slice(currentIndex - 3, currentIndex + 2),
-						{ key: "idk-2", value: "..." },
-						...array.slice(array.length - 2),
-					]
-				case currentIndex > array.length - 5:
-					return [
-						...array.slice(0, 2),
-						{ key: "idk-1", value: "..." },
-						...array.slice(array.length - 6),
-					]
-				default:
-					return array
-			}
-		}
-
-		const indexArr = times(currentSize, n => n + 1)
-		const pagesArray = parseArrayIndex(
-			indexArr.map(item => ({
-				key: item.toString(),
-				value: item,
-			}))
-		)
-
-		return pagesArray
-	}, [currentSize, currentIndex])
-
-	const onNext = (index: number) => () => {
+	const onNext = (index: number) => (): void => {
 		const nextIndex = index + 1
 		if (nextIndex <= size) {
-			setCurrentIndex(nextIndex)
 			onPressNext?.(index)
 		}
 	}
 
-	const onPrevious = (index: number) => () => {
+	const onPrevious = (index: number) => (): void => {
 		const previousIndex = index - 1
 		if (previousIndex >= 1) {
-			setCurrentIndex(previousIndex)
 			onPressPrevious?.(index)
 		}
 	}
 
-	const onPagination = (index: number) => () => {
+	const onPagination = (index: number) => (): void => {
 		onPressPage?.(index)
-		setCurrentIndex(index)
 	}
 
 	useEffect(() => {
 		setCurrentSize(size)
-		setCurrentIndex(index)
 	}, [size, index])
 
 	return {
-		currentIndex,
+		index,
+		currentSize,
 		onNext,
 		onPagination,
 		onPrevious,
-		renderPages,
 		paginationBarVariantsStyles,
 		variants,
 	}

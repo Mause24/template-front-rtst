@@ -1,0 +1,83 @@
+.scrollComponent {
+	view-timeline-name: --component;
+	animation-timeline: --component;
+	animation-range: entry 25% cover 50%;
+	animation-fill-mode: both;
+}
+
+.lineMove::after {
+	content: "";
+	animation-timeline: --component;
+	animation-range: entry 45% cover 60%;
+	animation-name: stretch-y;
+	transform-origin: top center;
+	animation-fill-mode: both;
+	position: absolute;
+	width: 6px;
+	height: 100%;
+	top: 0;
+	z-index: -1;
+}
+
+.yAxis {
+	view-timeline-axis: block;
+}
+
+.xAxis {
+	view-timeline-axis: inline;
+}
+
+.slideDownFade {
+	animation-name: slide-down-fade;
+}
+
+.zoom {
+	animation-name: zoom;
+}
+
+.fade {
+	animation-name: fade;
+}
+
+@keyframes slide-down-fade {
+	from {
+		transform: translateY(-25%);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes fade {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes zoom {
+	from {
+		transform: scale(25%);
+	}
+	to {
+		transform: scale(100%);
+	}
+}
+@keyframes stretch-y {
+	from {
+		transform: scaleY(0%);
+	}
+	to {
+		transform: scaleY(100%);
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.lineMove::after {
+		animation-range: entry 45% cover 50%;
+	}
+}

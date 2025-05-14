@@ -20,21 +20,11 @@ export const MissingRoute = (): JSX.Element => {
 				"text-gray-700"
 			)}
 		>
-			<Text
-				type="h1"
-				size="4xl"
-				weight="bold"
-				props={{ className: clsx("mb-4") }}
-			>
+			<Text type="h1" size="4xl" weight="bold" className={clsx("mb-4")}>
 				404
 			</Text>
 
-			<Text
-				color="black"
-				type="p"
-				size="lg"
-				props={{ className: clsx("mb-8") }}
-			>
+			<Text type="p" size="lg" className={clsx("mb-8", "text-black")}>
 				Lo sentimos, la página que buscas no existe.
 			</Text>
 

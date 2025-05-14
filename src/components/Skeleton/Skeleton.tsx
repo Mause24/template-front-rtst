@@ -1,13 +1,13 @@
 import clsx from "clsx"
-import { SkeletonProps } from "./Skeleton.type"
+import { SkeletonProps } from "./Skeleton.types"
 
-export const Skeleton: React.FC<SkeletonProps> = ({
+export const Skeleton = ({
 	width = "5rem",
 	height = "5rem",
 	color = "#DDDBDD",
 	borderRadius = "0",
 	className,
-}) => {
+}: SkeletonProps): JSX.Element => {
 	return (
 		<span
 			className={clsx(

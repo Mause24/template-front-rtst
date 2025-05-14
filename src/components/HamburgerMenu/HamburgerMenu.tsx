@@ -3,7 +3,7 @@ import { Button } from "../Button"
 import { HamburgerMenuProps } from "./HamburgerMenu.types"
 import { useHamburgerMenu } from "./useHamburgerMenu"
 
-export const HamburgerMenu = (props: HamburgerMenuProps) => {
+export const HamburgerMenu = (props: HamburgerMenuProps): JSX.Element => {
 	const { isCurrentOpen, setIsOpen, className } = useHamburgerMenu(props)
 
 	return (
