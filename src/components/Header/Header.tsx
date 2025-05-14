@@ -1,4 +1,4 @@
-import { IMAGES } from "@/Constants"
+import { IMAGES } from "@/constants"
 import clsx from "clsx"
 import { Link } from "react-router-dom"
 import { Button } from "../Button"
@@ -120,16 +120,16 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									)}
 								>
 									<Text
-										props={{
-											className: isMobileScreen
+										className={
+											isMobileScreen
 												? clsx(
 														"text-base",
 														"w-full",
-														"text-center"
+														"text-center",
+														"text-white"
 													)
-												: "",
-										}}
-										color="white"
+												: ""
+										}
 										size="lg"
 										type="span"
 									>
@@ -174,16 +174,16 @@ export const Header = (props: HeaderProps): JSX.Element => {
 									onClick={onDeleteSession}
 								>
 									<Text
-										props={{
-											className: isMobileScreen
+										className={
+											isMobileScreen
 												? clsx(
 														"text-base",
 														"w-full",
-														"text-center"
+														"text-center",
+														"text-white"
 													)
-												: "",
-										}}
-										color="white"
+												: ""
+										}
 										size="lg"
 										type="span"
 									>

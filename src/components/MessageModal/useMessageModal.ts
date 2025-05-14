@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react"
 import { MessageModalProps } from "./MessageModal.types"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useMessageModal = (props: MessageModalProps) => {
 	const {
 		visible,
@@ -17,7 +18,7 @@ export const useMessageModal = (props: MessageModalProps) => {
 
 	const [isOpenMessage, setIsOpenMessage] = useState(visible)
 
-	const onCloseMessage = () => {
+	const onCloseMessage = (): void => {
 		onClose()
 		setIsOpenMessage(false)
 	}
@@ -25,7 +26,7 @@ export const useMessageModal = (props: MessageModalProps) => {
 	const handleAccept = useMemo(
 		() =>
 			closeModalOnAccept
-				? () => {
+				? (): void => {
 						onClose()
 						onAccept()
 					}
@@ -35,7 +36,7 @@ export const useMessageModal = (props: MessageModalProps) => {
 	const handleDismiss = useMemo(
 		() =>
 			closeModalOnDismiss && onDismiss
-				? () => {
+				? (): void => {
 						onClose()
 						onDismiss?.()
 					}

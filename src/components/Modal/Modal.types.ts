@@ -1,11 +1,11 @@
 export type AnimationsModal =
-	| 'slide-up'
-	| 'slide-down'
-	| 'slide-left'
-	| 'slide-right'
-	| 'fade'
-	| 'scale'
-	| 'tv'
+	| "slide-up"
+	| "slide-down"
+	| "slide-left"
+	| "slide-right"
+	| "fade"
+	| "scale"
+	| "tv"
 
 export interface CustomModalProps {
 	visible: boolean

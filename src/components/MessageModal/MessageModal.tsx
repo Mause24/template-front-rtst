@@ -32,7 +32,7 @@ export const MessageModal = (props: MessageModalProps): JSX.Element => {
 					"gap-y-4"
 				)}
 			>
-				<Text props={{ className: "text-center" }} type="h3">
+				<Text className={clsx("text-center")} type="h3">
 					{title}
 				</Text>
 				{message && <Text type="p">{message}</Text>}

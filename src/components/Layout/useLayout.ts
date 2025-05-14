@@ -1,4 +1,4 @@
-import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/Constants"
+import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants"
 import { useAuthStore } from "@/stores"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"

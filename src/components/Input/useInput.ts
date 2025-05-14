@@ -2,12 +2,14 @@ import { useHover } from "@/hooks"
 import clsx from "clsx"
 import { isEmpty } from "lodash"
 import { useMemo } from "react"
-import { InputProps } from "./Input.types"
+import { InputNativeTypes, InputProps } from "./Input.types"
 
-export const useInput = (props: InputProps) => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const useInput = <T extends HTMLElement>(props: InputProps) => {
 	const {
 		containerClassname,
 		labelClassname,
+		inputClassname,
 		error,
 		id,
 		className,
@@ -17,15 +19,17 @@ export const useInput = (props: InputProps) => {
 		label,
 		placeholder,
 		type,
+		leftIcon,
+		rightIcon,
 		...rest
 	} = props
 
-	const [refInput, hovering] = useHover<HTMLInputElement>()
+	const [refInput, hovering] = useHover<T>()
 
 	const isNotEmptyInput = (
-		type: React.HTMLInputTypeAttribute | undefined,
-		_value: string | number | readonly string[] | undefined
-	) => {
+		_: string | number | readonly string[] | undefined,
+		type?: InputNativeTypes
+	): boolean => {
 		switch (true) {
 			case type === "number":
 				return typeof value === "number" || !isEmpty(value)
@@ -47,10 +51,10 @@ export const useInput = (props: InputProps) => {
 		googleInput: {
 			container: clsx(
 				"relative",
-				"[&>label:has(+input:focus-within)]:bg-white",
-				"[&>label:has(+input:focus-within)]:!text-xs",
-				"[&>label:has(+input:focus-within)]:translate-y-[-20px]",
-				"[&>label:has(+input:focus-within)]:translate-x-[-5px]"
+				"[&>label:has(+*:focus-within)]:bg-white",
+				"[&>label:has(+*:focus-within)]:!text-xs",
+				"[&>label:has(+*:focus-within)]:-translate-y-[calc(50%+8px)]",
+				"[&>label:has(+*:focus-within)]:translate-x-[-5px]"
 			),
 			label: clsx(
 				"absolute",
@@ -61,11 +65,11 @@ export const useInput = (props: InputProps) => {
 				"duration-[50ms]",
 				"ease-linear",
 				"pointer-events-none",
-				isNotEmptyInput(type, value) &&
+				isNotEmptyInput(value, type) &&
 					clsx(
 						"bg-white",
 						"!text-xs",
-						"translate-y-[-20px]",
+						"-translate-y-[calc(50%+8px)]",
 						"translate-x-[-5px]"
 					)
 			),
@@ -80,8 +84,11 @@ export const useInput = (props: InputProps) => {
 
 	const stylesVariants = {
 		primary: clsx(
-			"focus-within:border-primary-normal",
-			hovering !== false ? "border-primary-normal" : "border-[#e5e7eb]"
+			"focus-within:border-light-primary-normal",
+			"focus-within:dark:border-light-secondary-aside",
+			hovering !== false
+				? "border-light-primary-normal"
+				: "border-[#e5e7eb]"
 		),
 		secondary: clsx(""),
 	}
@@ -109,6 +116,9 @@ export const useInput = (props: InputProps) => {
 		value,
 		refInput,
 		type,
+		leftIcon,
+		rightIcon,
+		inputClassname,
 		rest,
 	}
 }

@@ -3,7 +3,7 @@ import { Text } from "../Text"
 import { InputProps } from "./Input.types"
 import { useInput } from "./useInput"
 
-export const Input = (props: InputProps) => {
+export const Input = (props: InputProps): JSX.Element => {
 	const {
 		className,
 		containerClassname,
@@ -15,10 +15,13 @@ export const Input = (props: InputProps) => {
 		id,
 		currentPlaceholder,
 		error,
-		rest,
 		value,
 		type,
-	} = useInput(props)
+		leftIcon,
+		rightIcon,
+		inputClassname,
+		rest,
+	} = useInput<HTMLInputElement>(props)
 
 	return (
 		<div
@@ -33,51 +36,71 @@ export const Input = (props: InputProps) => {
 				<Text
 					type="label"
 					size="lg"
+					className={clsx(
+						"font-bold",
+						error
+							? clsx("text-red-400", "dark:text-red-400")
+							: clsx(
+									"text-light-primary-normal",
+									"dark:text-white"
+								),
+						styleType.label,
+						labelClassname
+					)}
 					props={{
-						className: clsx(
-							"font-bold",
-							styleType.label,
-							labelClassname
-						),
 						htmlFor: id ?? label,
 					}}
-					color={error ? "red" : "primary"}
 				>
 					{label}
 				</Text>
 			)}
-			<input
-				ref={refInput}
-				id={id ?? label}
-				value={value}
-				type={type}
+			<div
 				className={clsx(
+					"flex",
+					"w-full",
 					"border-2",
-					"pl-3",
-					"py-3",
 					"rounded-md",
-					"outline-none",
-					"focus-within:outline-none",
+					"overflow-hidden",
 					"transition-all",
 					"duration-200",
 					"ease-linear",
-					error ? "border-red-400" : "",
-					styleType.input,
+					error
+						? clsx("border-red-400", "dark:border-red-400")
+						: clsx(
+								"dark:border-light-secondary-aside",
+								"hover:dark:border-white"
+							),
 					styleVariant,
 					className
 				)}
-				placeholder={currentPlaceholder}
-				{...rest}
-			/>
+			>
+				{leftIcon}
+				<input
+					ref={refInput}
+					id={id ?? label}
+					value={value}
+					type={type}
+					className={clsx(
+						"flex-1",
+						"pl-3",
+						"py-3",
+						"outline-none",
+						"focus-within:outline-none",
+						"dark:bg-light-secondary-navBar",
+						"dark:text-white",
+						styleType.input,
+						inputClassname
+					)}
+					placeholder={currentPlaceholder}
+					{...rest}
+				/>
+				{rightIcon}
+			</div>
 			{error &&
 				(typeof error === "string" ? (
 					<Text
-						color="red"
-						type="span"
 						size="sm"
-						props={{
-							className: clsx("ml-2", "mt-2"),
-						}}
+						className={clsx("ml-2", "mt-2", "text-red-400")}
 					>
 						{error}
 					</Text>

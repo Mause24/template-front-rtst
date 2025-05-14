@@ -136,8 +136,8 @@ export const Home = (): JSX.Element => {
 				cols={3}
 				rows={3}
 				onChangePage={onChangePage}
-				onPressNext={_ => onMoveNext()}
-				onPressPrevious={_ => onMovePrevious()}
+				onPressNext={() => onMoveNext()}
+				onPressPrevious={() => onMovePrevious()}
 				size={pagesNumber}
 				data={paginatedData}
 			/>

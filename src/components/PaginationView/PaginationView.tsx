@@ -3,7 +3,9 @@ import { PaginationBar } from "../PaginationBar"
 import { PaginationViewProps } from "./PaginationView.type"
 import { usePaginationView } from "./usePaginationView"
 
-export const PaginationView = <T,>(props: PaginationViewProps<T>) => {
+export const PaginationView = <T,>(
+	props: PaginationViewProps<T>
+): JSX.Element => {
 	const {
 		onPressNext,
 		onPressPage,

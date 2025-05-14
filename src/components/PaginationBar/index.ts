@@ -1,2 +1,2 @@
-export * from "./PaginationBar";
-export * from "./PaginationBar.type";
+export * from "./PaginationBar"
+export * from "./PaginationBar.types"

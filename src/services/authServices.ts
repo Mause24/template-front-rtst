@@ -18,7 +18,9 @@ export const loginService = async (
 	throw new Error(response.data.message)
 }
 
-export const registerService = async (body: RegisterServiceBody) => {
+export const registerService = async (
+	body: RegisterServiceBody
+): Promise<Session> => {
 	const response = await API.post<ResponseBody<Session>>(
 		"/auth/register/",
 		body

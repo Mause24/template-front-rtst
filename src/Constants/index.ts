@@ -1,2 +1,2 @@
-export * from "./Images"
+export * from "./images"
 export * from "./routes"

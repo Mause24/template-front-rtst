@@ -1,4 +1,4 @@
-import { IMAGES } from "@/Constants"
+import { IMAGES } from "@/constants"
 import clsx from "clsx"
 import { Link } from "react-router-dom"
 import { Text } from "../Text"
@@ -103,14 +103,12 @@ export const Footer = (): JSX.Element => {
 				/>
 				<Text
 					type="span"
-					props={{
-						className: clsx(
-							"block",
-							"text-sm",
-							"text-gray-500",
-							"sm:text-center"
-						),
-					}}
+					className={clsx(
+						"block",
+						"text-sm",
+						"text-gray-500",
+						"sm:text-center"
+					)}
 				>
 					© 2023{" "}
 					<Link to={"#"} className={clsx("hover:underline")}>

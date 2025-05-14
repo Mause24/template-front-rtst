@@ -9,6 +9,7 @@ interface AlertMessagesProps {
 	message: string
 	severity: "success" | "error"
 }
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useRegister = () => {
 	const [alert, setAlert] = useState<AlertMessagesProps>({
 		show: false,
