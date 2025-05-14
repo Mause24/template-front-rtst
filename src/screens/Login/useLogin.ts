@@ -10,6 +10,7 @@ interface AlertMessagesProps {
 	severity: "success" | "error"
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const useLogin = () => {
 	const { setSession } = useAuthStore()
 	const [alert, setAlert] = useState<AlertMessagesProps>({

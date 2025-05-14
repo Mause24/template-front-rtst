@@ -4,7 +4,7 @@ import clsx from "clsx"
 import { Formik } from "formik"
 import { useRegister } from "./useRegister"
 
-export const Register = () => {
+export const Register = (): JSX.Element => {
 	const { onSubmit, validationSchema, setAlert, alert } = useRegister()
 
 	return (
@@ -59,13 +59,11 @@ export const Register = () => {
 					>
 						<Text
 							type="h2"
-							props={{
-								className: clsx(
-									"text-2xl",
-									"text-primary-normal",
-									"text-center"
-								),
-							}}
+							className={clsx(
+								"text-2xl",
+								"text-primary-normal",
+								"text-center"
+							)}
 						>
 							Registro
 						</Text>
@@ -156,26 +154,24 @@ export const Register = () => {
 				)}
 			</Formik>
 			{alert.show && (
-				<>
-					<Snackbar
-						open={alert.show}
-						autoHideDuration={6000}
+				<Snackbar
+					open={alert.show}
+					autoHideDuration={6000}
+					onClose={() => setAlert({ ...alert, show: false })}
+					anchorOrigin={{
+						vertical: "top",
+						horizontal: "center",
+					}}
+				>
+					<Alert
 						onClose={() => setAlert({ ...alert, show: false })}
-						anchorOrigin={{
-							vertical: "top",
-							horizontal: "center",
-						}}
+						severity="error"
+						variant="filled"
+						sx={{ width: "100%" }}
 					>
-						<Alert
-							onClose={() => setAlert({ ...alert, show: false })}
-							severity="error"
-							variant="filled"
-							sx={{ width: "100%" }}
-						>
-							{alert.message}
-						</Alert>
-					</Snackbar>
-				</>
+						{alert.message}
+					</Alert>
+				</Snackbar>
 			)}
 		</div>
 	)
