@@ -8,8 +8,8 @@ export const useHover = <T extends HTMLElement>(): [
 	const [isHovered, setIsHovered] = useState<boolean>(false)
 	const ref = useRef<T>(null)
 
-	const handleMouseEnter = () => setIsHovered(true)
-	const handleMouseLeave = () => setIsHovered(false)
+	const handleMouseEnter = (): void => setIsHovered(true)
+	const handleMouseLeave = (): void => setIsHovered(false)
 
 	useEffect(() => {
 		const node = ref.current
@@ -17,7 +17,7 @@ export const useHover = <T extends HTMLElement>(): [
 			node.addEventListener("mouseenter", handleMouseEnter)
 			node.addEventListener("mouseleave", handleMouseLeave)
 
-			return () => {
+			return (): void => {
 				node.removeEventListener("mouseenter", handleMouseEnter)
 				node.removeEventListener("mouseleave", handleMouseLeave)
 			}
@@ -36,9 +36,10 @@ export const useHovers = <T extends HTMLElement>(): [
 	)
 	const refs = useRef<HoverRef<T>[]>([])
 
-	const handleMouseEnter = (index: number | string) => () =>
+	const handleMouseEnter = (index: number | string) => (): void =>
 		setHoveredIndex(index)
-	const handleMouseLeave = () => setHoveredIndex(null)
+
+	const handleMouseLeave = (): void => setHoveredIndex(null)
 
 	useEffect(() => {
 		refs.current.forEach((node, index) => {
@@ -48,7 +49,7 @@ export const useHovers = <T extends HTMLElement>(): [
 			}
 		})
 
-		return () => {
+		return (): void => {
 			refs.current.forEach((node, index) => {
 				if (node) {
 					node.removeEventListener(

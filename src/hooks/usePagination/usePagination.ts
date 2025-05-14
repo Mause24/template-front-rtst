@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { UsePaginationProps } from "./usePagination.types"
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const usePagination = <E = []>(props: UsePaginationProps<E>) => {
 	const { data, pageSize } = props
 	const [paginatedData, setPaginatedData] = useState<E[]>(data)
