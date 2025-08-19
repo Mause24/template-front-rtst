@@ -13,6 +13,7 @@ export const useSelect = <T extends SelectItem>(props: SelectProps<T>) => {
 		filter,
 		renderOptionsLabel,
 		renderSelectedOptionLabel,
+		renderOptionItems,
 		keyExtractor,
 	} = props
 	const [filterValue, setFilterValue] = useState<string>("")
@@ -26,11 +27,19 @@ export const useSelect = <T extends SelectItem>(props: SelectProps<T>) => {
 	const [isOpen, setIsOpen] = useState(false)
 
 	const handleFilter = useCallback(
-		(item: T) =>
-			!filter || filterValue === ""
-				? true
-				: item.label.toUpperCase().includes(filterValue.toUpperCase()),
-		[filter, filterValue]
+		(item: T) => {
+			switch (true) {
+				case typeof filter === "function":
+					return filter(item, filterValue)
+				case filter && filterValue !== "":
+					return item.label
+						.toUpperCase()
+						.includes(filterValue.toUpperCase())
+				default:
+					return true
+			}
+		},
+		[filter, filterValue, selectedItem]
 	)
 
 	const handleSelectItem = useCallback(
@@ -56,6 +65,7 @@ export const useSelect = <T extends SelectItem>(props: SelectProps<T>) => {
 		handleFilter,
 		renderOptionsLabel,
 		renderSelectedOptionLabel,
+		renderOptionItems,
 		filter,
 	}
 }

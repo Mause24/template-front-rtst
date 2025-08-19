@@ -71,8 +71,6 @@ export const usePaginationBarItems = (props: PaginationBarItemsProps) => {
 						...array.slice(array.length - 2),
 					]
 				case index > 5 && index < array.length - 4:
-					console.log("Hi i'm in")
-
 					return [
 						...array.slice(0, 2),
 						{ key: "idk-1", value: "...", label: "..." },

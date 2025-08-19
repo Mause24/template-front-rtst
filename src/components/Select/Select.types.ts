@@ -9,9 +9,10 @@ export interface SelectProps<T extends SelectItem> {
 	hanldeSelectOption?: (item: T) => void
 	placeholder?: string
 	children?: JSX.Element
-	filter?: boolean
+	filter?: boolean | ((item: T, searchValue: string) => boolean)
 	renderSelectedOptionLabel?: (item: T) => string
 	renderOptionsLabel?: (item: T) => string
+	renderOptionItems?: (item: T) => JSX.Element
 	keyExtractor?: (item: T, index: number) => string
 	//STYLES
 	className?: {
