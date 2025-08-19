@@ -1,4 +1,4 @@
-import { countries } from "@/Constants"
+import { countries } from "@/constants"
 import { useMemo, useState } from "react"
 import { useInput } from "../../useInput"
 import { PhoneCountry, PhoneInputProps } from "./PhoneInput.types"

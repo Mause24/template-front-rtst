@@ -1,5 +1,4 @@
 export * from "./Accordion"
-export * from "./AsideNavbar"
 export * from "./Button"
 export * from "./Card"
 export * from "./Container3D"
