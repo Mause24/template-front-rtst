@@ -40,10 +40,7 @@ export const Input = (props: InputProps): JSX.Element => {
 						"font-bold",
 						error
 							? clsx("text-red-400", "dark:text-red-400")
-							: clsx(
-									"text-light-primary-normal",
-									"dark:text-white"
-								),
+							: clsx("text-primary-normal", "dark:text-white"),
 						styleType.label,
 						labelClassname
 					)}
@@ -67,7 +64,7 @@ export const Input = (props: InputProps): JSX.Element => {
 					error
 						? clsx("border-red-400", "dark:border-red-400")
 						: clsx(
-								"dark:border-light-secondary-aside",
+								"dark:border-secondary-normal",
 								"hover:dark:border-white"
 							),
 					styleVariant,
@@ -86,7 +83,7 @@ export const Input = (props: InputProps): JSX.Element => {
 						"py-3",
 						"outline-none",
 						"focus-within:outline-none",
-						"dark:bg-light-secondary-navBar",
+						"dark:bg-secondary-normal",
 						"dark:text-white",
 						styleType.input,
 						inputClassname

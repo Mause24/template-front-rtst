@@ -45,8 +45,8 @@ export const Accordion = ({
 								"w-4",
 								"h-4",
 								"transition-all",
-								"text-light-secondary-alternate",
-								"dark:text-dark-secondary-alternate",
+								"text-secondary-alternate",
+								"dark:text-secondary-alternate",
 								"ease-linear",
 								"duration-200",
 								isOpen ? "rotate-180" : "rotate-0"

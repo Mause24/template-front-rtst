@@ -47,10 +47,10 @@ export const Dropdown: React.FC<DropDownProps> = props => {
 							"w-56",
 							"rounded-md",
 							"shadow-lg",
-							"dark:bg-light-secondary-aside",
+							"dark:bg-secondary-normal",
 							"border-[1px]",
 							"bg-white",
-							"border-dark-secondary-alternate",
+							"border-secondary-alternate",
 							"ring-black",
 							"ring-opacity-5",
 							"focus:outline-none"

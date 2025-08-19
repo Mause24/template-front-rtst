@@ -21,8 +21,8 @@ export const TimelineItem = (props: TimelineItemProps): JSX.Element => {
 				"relative",
 				"justify-start",
 				"items-center",
-				"bg-gray-light",
-				"dark:bg-dark-secondary-alternate",
+				"bg-gray",
+				"dark:bg-secondary-alternate",
 				"rounded-xl",
 				"shadow-lg",
 				"max-md:max-h-[90%]"

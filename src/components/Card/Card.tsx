@@ -9,7 +9,7 @@ export const Card = ({ title, src, path }: CardProps): JSX.Element => {
 			<div
 				className={clsx(
 					"bg-neutral-200",
-					"dark:bg-dark-backgroundHeader-normal",
+					"dark:bg-secondary-normal",
 					"border-b-4",
 					"border-blue-500"
 				)}
@@ -29,8 +29,8 @@ export const Card = ({ title, src, path }: CardProps): JSX.Element => {
 					<Text
 						type="p"
 						className={clsx(
-							"text-light-secondary-alternate",
-							"dark:text-gray-light",
+							"text-secondary-alternate",
+							"dark:text-gray-300",
 							"font-sans"
 						)}
 					>

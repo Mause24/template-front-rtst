@@ -38,7 +38,21 @@ export const useDropDown = (props: DropDownProps) => {
 					onMouseLeave={handleHovering(null)}
 				>
 					<Dropdown items={item.childs} isOpen={hovering === index}>
-						<div className="cursor-pointer flex w-full !justify-start px-4 py-2 text-sm dark:text-white hover:bg-light-primary-normal hover:text-white rounded-none">
+						<div
+							className={clsx(
+								"cursor-pointer",
+								"flex",
+								"w-full",
+								"!justify-start",
+								"px-4",
+								"py-2",
+								"text-sm",
+								"dark:text-white",
+								"hover:bg-primary-normal",
+								"hover:text-white",
+								"rounded-none"
+							)}
+						>
 							{item.label}
 						</div>
 					</Dropdown>
@@ -48,7 +62,7 @@ export const useDropDown = (props: DropDownProps) => {
 					key={item.value}
 					variant="transparent"
 					type="button"
-					className="flex w-full !justify-start px-4 py-2 text-sm dark:text-white hover:bg-light-primary-normal hover:text-white rounded-none "
+					className="flex w-full !justify-start px-4 py-2 text-sm dark:text-white hover:bg-primary-normal hover:text-white rounded-none "
 					onClick={() => {
 						item.onClick?.(item.value)
 					}}

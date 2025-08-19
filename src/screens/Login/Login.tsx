@@ -56,13 +56,11 @@ export const Login = (): JSX.Element => {
 						>
 							<Text
 								type="h2"
-								props={{
-									className: clsx(
-										"text-2xl",
-										"text-primary-normal",
-										"text-center"
-									),
-								}}
+								className={clsx(
+									"text-2xl",
+									"text-primary-normal",
+									"text-center"
+								)}
 							>
 								Iniciar Sesion
 							</Text>
@@ -109,26 +107,24 @@ export const Login = (): JSX.Element => {
 				</Formik>
 			</div>
 			{alert.show && (
-				<>
-					<Snackbar
-						open={alert.show}
-						autoHideDuration={6000}
+				<Snackbar
+					open={alert.show}
+					autoHideDuration={6000}
+					onClose={() => setAlert({ ...alert, show: false })}
+					anchorOrigin={{
+						vertical: "top",
+						horizontal: "center",
+					}}
+				>
+					<Alert
 						onClose={() => setAlert({ ...alert, show: false })}
-						anchorOrigin={{
-							vertical: "top",
-							horizontal: "center",
-						}}
+						severity="error"
+						variant="filled"
+						sx={{ width: "100%" }}
 					>
-						<Alert
-							onClose={() => setAlert({ ...alert, show: false })}
-							severity="error"
-							variant="filled"
-							sx={{ width: "100%" }}
-						>
-							{alert.message}
-						</Alert>
-					</Snackbar>
-				</>
+						{alert.message}
+					</Alert>
+				</Snackbar>
 			)}
 		</>
 	)

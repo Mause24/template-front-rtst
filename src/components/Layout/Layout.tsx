@@ -15,16 +15,16 @@ export const Layout = (props: LayoutProps): JSX.Element => {
 					"flex",
 					"min-h-[calc(100dvh-48px)]",
 					"h-full",
-					"bg-light-background-normal",
-					"dark:bg-light-secondary-normal"
+					"bg-secondary-normal",
+					"dark:bg-secondary-normal"
 				)}
 			>
 				{/* <AsideNavbar /> */}
 				<main
 					className={clsx(
 						"flex-1",
-						"bg-light-background-normal",
-						"dark:bg-light-secondary-normal"
+						"bg-secondary-normal",
+						"dark:bg-secondary-normal"
 					)}
 				>
 					{children}

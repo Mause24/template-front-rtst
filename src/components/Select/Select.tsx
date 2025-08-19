@@ -68,11 +68,11 @@ export const Select = <T extends SelectItem>(
 							"h-full",
 							"border-2",
 							"bg-white",
-							"dark:bg-light-secondary-navBar",
+							"dark:bg-secondary-normal",
 							"dark:text-white",
-							"dark:border-light-secondary-aside",
+							"dark:border-secondary-normal",
 							"hover:dark:border-white",
-							"hover:border-light-primary-normal",
+							"hover:border-primary-normal",
 							"transition-all",
 							"duration-200",
 							className?.selected
@@ -98,9 +98,9 @@ export const Select = <T extends SelectItem>(
 						"mt-1",
 						"border-2",
 						"bg-white",
-						"border-dark-primary-normal",
-						"dark:border-light-secondary-aside",
-						"dark:bg-light-secondary-navBar",
+						"border-primary-normal",
+						"dark:border-secondary-normal",
+						"dark:bg-secondary-normal",
 						"rounded-md",
 						"z-[+1]",
 						"duration-150",
@@ -117,7 +117,7 @@ export const Select = <T extends SelectItem>(
 							className={clsx(
 								"flex",
 								"border-b-2",
-								"dark:border-b-light-secondary-aside"
+								"dark:border-b-secondary-normal"
 							)}
 						>
 							<Input
@@ -136,8 +136,8 @@ export const Select = <T extends SelectItem>(
 												"w-7",
 												"h-7",
 												"select-none",
-												"text-dark-primary-normal",
-												"dark:text-light-secondary-aside"
+												"text-primary-normal",
+												"dark:text-secondary-normal"
 											)}
 										/>
 									</div>
@@ -170,7 +170,7 @@ export const Select = <T extends SelectItem>(
 									"rounded-none",
 									"flex-shrink-0",
 									"hover:bg-gray-100",
-									"hover:dark:bg-light-secondary-aside",
+									"hover:dark:bg-secondary-normal",
 									className?.selectItem
 								)}
 								onClick={handleSelectItem(item)}

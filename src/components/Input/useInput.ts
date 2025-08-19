@@ -84,11 +84,9 @@ export const useInput = <T extends HTMLElement>(props: InputProps) => {
 
 	const stylesVariants = {
 		primary: clsx(
-			"focus-within:border-light-primary-normal",
-			"focus-within:dark:border-light-secondary-aside",
-			hovering !== false
-				? "border-light-primary-normal"
-				: "border-[#e5e7eb]"
+			"focus-within:border-primary-normal",
+			"focus-within:dark:border-secondary-aside",
+			hovering !== false ? "border-primary-normal" : "border-[#e5e7eb]"
 		),
 		secondary: clsx(""),
 	}

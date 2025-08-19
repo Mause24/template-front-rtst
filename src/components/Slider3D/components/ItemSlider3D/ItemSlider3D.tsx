@@ -23,8 +23,8 @@ export const ItemSlider3D = ({
 				"duration-500",
 				"cursor-pointer",
 				"bg-gray-heavy",
-				"hover:bg-light-primary-normal",
-				"dark:bg-dark-secondary-alternate",
+				"hover:bg-primary-normal",
+				"dark:bg-secondary-normal",
 				"group"
 			)}
 		>
@@ -64,7 +64,7 @@ export const ItemSlider3D = ({
 						"transition-all",
 						"duration-500",
 						"bg-gradient-to-b",
-						"via-dark-background-normal",
+						"via-secondary-normal",
 						"from-transparent",
 						"to-black",
 						"opacity-0",
@@ -80,7 +80,7 @@ export const ItemSlider3D = ({
 				>
 					<Text
 						className={clsx(
-							"text-dark-primary-normal",
+							"text-primary-normal",
 							"text-base",
 							"text-center",
 							"max-md:select-none"
