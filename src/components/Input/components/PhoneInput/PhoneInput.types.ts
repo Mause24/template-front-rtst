@@ -1,8 +1,14 @@
 import { GeneralCustomInputProps } from "@/components"
+import { Country } from "@/interfaces"
 import { DetailedHTMLProps, InputHTMLAttributes } from "react"
 
 export interface PhoneInputValue {
 	ext: string
+	value: string
+}
+
+export interface PhoneCountry extends Country {
+	label: string
 	value: string
 }
 

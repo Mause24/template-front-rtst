@@ -1,5 +1,6 @@
 import { Select, Text } from "@/components"
 import clsx from "clsx"
+import { CountrySelectItem } from "./components"
 import { PhoneInputProps } from "./PhoneInput.types"
 import { usePhoneInput } from "./usePhoneInput"
 
@@ -61,10 +62,17 @@ export const PhoneInput = (props: PhoneInputProps): JSX.Element => {
 				<Select
 					keyExtractor={item => item.label}
 					renderSelectedOptionLabel={item => String(item.value)}
-					filter
-					key={String(selectedCountry.value)}
+					filter={(item, searchValue) =>
+						item.phoneExtension.includes(searchValue) ||
+						item.label.includes(searchValue) ||
+						item.localName.includes(searchValue)
+					}
+					key={String(selectedCountry.phoneExtension)}
 					selectOption={selectedCountry}
 					hanldeSelectOption={handleCountryChange}
+					renderOptionItems={item => (
+						<CountrySelectItem item={item} />
+					)}
 					className={{
 						container: clsx("w-full", "h-14"),
 						selected: clsx(

@@ -10,9 +10,26 @@ export const Layout = (props: LayoutProps): JSX.Element => {
 	return (
 		<>
 			<Header />
-			<main className={clsx("min-h-[calc(100dvh-290px)]", "h-full")}>
-				{children}
-			</main>
+			<div
+				className={clsx(
+					"flex",
+					"min-h-[calc(100dvh-48px)]",
+					"h-full",
+					"bg-light-background-normal",
+					"dark:bg-light-secondary-normal"
+				)}
+			>
+				{/* <AsideNavbar /> */}
+				<main
+					className={clsx(
+						"flex-1",
+						"bg-light-background-normal",
+						"dark:bg-light-secondary-normal"
+					)}
+				>
+					{children}
+				</main>
+			</div>
 			<Footer />
 		</>
 	)

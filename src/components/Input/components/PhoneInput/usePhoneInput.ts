@@ -1,8 +1,7 @@
-import { SelectItem } from "@/components"
+import { countries } from "@/Constants"
 import { useMemo, useState } from "react"
-import { useTranslation } from "react-i18next"
 import { useInput } from "../../useInput"
-import { PhoneInputProps } from "./PhoneInput.types"
+import { PhoneCountry, PhoneInputProps } from "./PhoneInput.types"
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export const usePhoneInput = (props: PhoneInputProps) => {
@@ -24,19 +23,27 @@ export const usePhoneInput = (props: PhoneInputProps) => {
 		...rest
 	} = props
 
-	const [selectedCountry, setSelectedCountry] = useState<SelectItem>({
-		label: "Colombia (+57)",
+	const [selectedCountry, setSelectedCountry] = useState<PhoneCountry>({
+		name: "Colombia",
+		localName: "Colombia",
+		phoneExtension: "+57",
+		countrySuffix: "co",
+		flagUrl: "https://flagcdn.com/w320/co.png",
+		label: "Colombia",
 		value: "+57",
 	})
 
-	const [t] = useTranslation("general")
-
-	const countryCodes: SelectItem[] = useMemo(
-		() => t("countryExtensions", { returnObjects: true }),
-		[t("countryExtensions")]
+	const countryCodes: PhoneCountry[] = useMemo(
+		() =>
+			countries.map(item => ({
+				...item,
+				value: item.phoneExtension,
+				label: item.name,
+			})),
+		[countries]
 	)
 
-	const handleCountryChange = (newCountry: SelectItem): void => {
+	const handleCountryChange = (newCountry: PhoneCountry): void => {
 		setSelectedCountry(newCountry)
 	}
 

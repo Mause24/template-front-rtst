@@ -21,6 +21,7 @@ export const Select = <T extends SelectItem>(
 		filter,
 		renderOptionsLabel,
 		renderSelectedOptionLabel,
+		renderOptionItems,
 		keyExtractor,
 	} = useSelect(props)
 
@@ -179,15 +180,17 @@ export const Select = <T extends SelectItem>(
 									String(item.value)
 								}
 							>
-								<Text
-									className={clsx(
-										"text-black",
-										"dark:text-white"
-									)}
-								>
-									{renderOptionsLabel?.(selectedItem) ??
-										item.label}
-								</Text>
+								{renderOptionItems?.(item) ?? (
+									<Text
+										className={clsx(
+											"text-black",
+											"dark:text-white"
+										)}
+									>
+										{renderOptionsLabel?.(selectedItem) ??
+											item.label}
+									</Text>
+								)}
 							</Button>
 						))}
 					</div>
