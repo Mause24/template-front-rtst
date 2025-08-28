@@ -29,7 +29,7 @@ export interface GroupRouteProps extends RouteProps {
 
 export interface RouteProps {
 	name: string
-	route?: string
+	route: string
 	ext?: Extensions
 }
 

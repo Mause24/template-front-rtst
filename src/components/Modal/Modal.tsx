@@ -1,5 +1,3 @@
-"use client"
-
 import clsx from "clsx"
 import { useMemo } from "react"
 import { createPortal } from "react-dom"

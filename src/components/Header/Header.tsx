@@ -1,4 +1,4 @@
-import { IMAGES } from "@/constants"
+import { IMAGES, RouteProps } from "@/constants"
 import clsx from "clsx"
 import { Link } from "react-router-dom"
 import { Button } from "../Button"
@@ -85,7 +85,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 								)
 						)}
 					>
-						{linksArray.map((item, index) => (
+						{linksArray.map((item: RouteProps, index: number) => (
 							<li
 								key={item.route}
 								className={clsx(

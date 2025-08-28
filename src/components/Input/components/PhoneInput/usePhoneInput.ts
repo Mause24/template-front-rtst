@@ -1,4 +1,5 @@
 import { countries } from "@/constants"
+import { Country } from "@/interfaces"
 import { useMemo, useState } from "react"
 import { useInput } from "../../useInput"
 import { PhoneCountry, PhoneInputProps } from "./PhoneInput.types"
@@ -35,7 +36,7 @@ export const usePhoneInput = (props: PhoneInputProps) => {
 
 	const countryCodes: PhoneCountry[] = useMemo(
 		() =>
-			countries.map(item => ({
+			countries.map((item: Country) => ({
 				...item,
 				value: item.phoneExtension,
 				label: item.name,
