@@ -1,4 +1,9 @@
-import { ADMIN_ROUTES, PRIVATE_ROUTES, PUBLIC_ROUTES } from "@/constants"
+import {
+	ADMIN_ROUTES,
+	PRIVATE_ROUTES,
+	PUBLIC_ROUTES,
+	RouteProps,
+} from "@/constants"
 import { useAuthStore } from "@/stores"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
@@ -12,9 +17,9 @@ export const useLayout = (props: LayoutProps) => {
 	const navigate = useNavigate()
 
 	// Define las rutas permitidas
-	const privateRoutes = PRIVATE_ROUTES.map(item => item.route)
-	const adminRoutes = ADMIN_ROUTES.map(item => item.route)
-	const publicRoutes = PUBLIC_ROUTES.map(item => item.route)
+	const privateRoutes = PRIVATE_ROUTES.map((item: RouteProps) => item.route)
+	const adminRoutes = ADMIN_ROUTES.map((item: RouteProps) => item.route)
+	const publicRoutes = PUBLIC_ROUTES.map((item: RouteProps) => item.route)
 
 	useEffect(() => {
 		const currentPath = location.pathname
